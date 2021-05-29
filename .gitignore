@@ -20,3 +20,4 @@ ipython_config.py
 usecases/movielens/ml-25m/
 usecases/movielens/README.txt
 usecases/movielens/usecase_movielens_sketch.ipynb
+.idea/
