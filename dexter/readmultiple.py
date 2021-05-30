@@ -4,7 +4,7 @@ import os
 from dexter.framelist import FrameList
 
 
-def read_mcsv(filepath, df_names=None):
+def readm_csv(filepath, df_names=None):
     """
     Read multiple files in a directory, returns a FrameList
     If df_names == None, it iterates the whole directory.
