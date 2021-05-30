@@ -1,2 +1,2 @@
 from dexter.framelist import FrameList
-from dexter.readmultiple import readm_csv
+from dexter.readmultiple import readm_csv, readm_json
