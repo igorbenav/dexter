@@ -59,7 +59,7 @@ dataframes.display()
     </tr>
   </table>
 </div>
-<div style="float: left;margin-right:10px">
+<div style="float: left">
   <table>
     <tr>
       <td><b>first</b></td>
@@ -83,7 +83,7 @@ dataframes.display()
     </tr>
   </table>
 </div>
-<br /><br /><br /><br /><br /><br /><br /><br />
+<br />
 
 Names and Frames
 ```python
