@@ -24,7 +24,7 @@ def read_chunks(df_chunk):
     return df
 
 
-def readm_csv(filepath, df_names=None):
+def readm_csv(filepath, df_names=None, chunksize=None):
     """
     Reads multiple files in a directory, returns a FrameList
     If df_names == None, it iterates the whole directory.
@@ -43,7 +43,7 @@ def readm_csv(filepath, df_names=None):
         filepath = np.full(df_names.shape, filepath)
         reader = filepath + df_names + '.csv'
 
-        temp_df = [pd.read_csv(i) for i in reader]
+        temp_df = [pd.read_csv(i, chunksize=chunksize) for i in reader]
         df_list.append(temp_df)
 
     # If names are not given, the function just reads all data in folder
@@ -52,14 +52,19 @@ def readm_csv(filepath, df_names=None):
         path, dirs, files = next(os.walk(filepath))
         file_count = len(files)
         for i in range(file_count):
-            temp_df = pd.read_csv(filepath + files[i])
+            temp_df = pd.read_csv(filepath + files[i], chunksize=chunksize)
             df_list.append(temp_df)
             df_names.append(files[i][:-4])
+
+    # If chunk_size is given, df_list is actually a list of reader objects,
+    # Let's unpack these objects
+    if chunksize is not None:
+        df_list = [read_chunks(i) for i in df_list]
 
     return FrameList(df_list, df_names)
 
 
-def readm_json(filepath, df_names=None):
+def readm_json(filepath, df_names=None, chunk_size=None):
     """
     Reads multiple files in a directory, returns a FrameList
     If df_names == None, it iterates the whole directory.
@@ -78,7 +83,7 @@ def readm_json(filepath, df_names=None):
         filepath = np.full(df_names.shape, filepath)
         reader = filepath + df_names + '.json'
 
-        temp_df = [pd.read_json(i) for i in reader]
+        temp_df = [pd.read_json(i, chunksize=chunk_size) for i in reader]
         df_list.append(temp_df)
 
     # If names are not given, the function just reads all data in folder
@@ -87,8 +92,13 @@ def readm_json(filepath, df_names=None):
         path, dirs, files = next(os.walk(filepath))
         file_count = len(files)
         for i in range(file_count):
-            temp_df = pd.read_json(filepath + files[i])
+            temp_df = pd.read_json(filepath + files[i], chunksize=chunk_size)
             df_list.append(temp_df)
             df_names.append(files[i][:-5])
+
+    # If chunk_size is given, df_list is actually a list of reader objects,
+    # Let's unpack these objects
+    if chunk_size is not None:
+        df_list = [read_chunks(i) for i in df_list]
 
     return FrameList(df_list, df_names)
