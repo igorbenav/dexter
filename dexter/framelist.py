@@ -93,7 +93,7 @@ class FrameList:
 
     def describe(self):
         """
-        Receives a FramesList.
+        Receives a FrameList.
 
         Returns a list of dataframes with each showing the types of each column of each original
         dataframe.
@@ -111,7 +111,7 @@ class FrameList:
 
     def display(self):
         """
-        Receives a FramesList .
+        Receives a FrameList .
 
         Returns a table which contains each IpyTable in an HTML cell.
 
@@ -124,6 +124,40 @@ class FrameList:
             ''.join(
                 ('<table><tr style="background-color:white;">',
                  ''.join([f'<td style="vertical-align:top">' + table._repr_html_() + '</td>' for table in self.frames]),
+                 '</tr></table>')
+            )
+        )
+
+        return HTML(f'<tr>{tables}</tr>')
+
+    def head(self, n=5):
+        """
+        Receives a FrameList
+
+        Returns a table which contains each df.head() in an HTML cell.
+        """
+        heads = [frame.head(n) for frame in self.frames]
+        tables = (
+            ''.join(
+                ('<table><tr style="background-color:white;">',
+                 ''.join([f'<td style="vertical-align:top">' + table._repr_html_() + '</td>' for table in heads]),
+                 '</tr></table>')
+            )
+        )
+
+        return HTML(f'<tr>{tables}</tr>')
+
+    def tail(self, n=5):
+        """
+        Receives a FrameList
+
+        Returns a table which contains each df.head() in an HTML cell.
+        """
+        heads = [frame.tail(n) for frame in self.frames]
+        tables = (
+            ''.join(
+                ('<table><tr style="background-color:white;">',
+                 ''.join([f'<td style="vertical-align:top">' + table._repr_html_() + '</td>' for table in heads]),
                  '</tr></table>')
             )
         )
