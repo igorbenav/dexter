@@ -134,7 +134,7 @@ class FrameList:
         """
         Receives a FrameList
 
-        Returns a table which contains each df.head() in an HTML cell.
+        Returns a table which contains each df.head(n) in an HTML cell.
         """
         heads = [frame.head(n) for frame in self.frames]
         tables = (
@@ -151,7 +151,7 @@ class FrameList:
         """
         Receives a FrameList
 
-        Returns a table which contains each df.head() in an HTML cell.
+        Returns a table which contains each df.tail(n) in an HTML cell.
         """
         heads = [frame.tail(n) for frame in self.frames]
         tables = (
