@@ -119,7 +119,10 @@ class FrameList:
         -----
         TODO: show the names of each dataframe above it in the future
         """
+        # unused for now, will be used to show the names of each dataframe above it
         table_names = [''.join(f'<th style="text-align:center">{name}</th>') for name in self.names]
+
+        # creates an html representation of the tables side by side
         tables = (
             ''.join(
                 ('<table><tr style="background-color:white;">',
@@ -137,6 +140,8 @@ class FrameList:
         Returns a table which contains each df.head(n) in an HTML cell.
         """
         heads = [frame.head(n) for frame in self.frames]
+
+        # creates an html representation of the tables side by side
         tables = (
             ''.join(
                 ('<table><tr style="background-color:white;">',
@@ -154,6 +159,8 @@ class FrameList:
         Returns a table which contains each df.tail(n) in an HTML cell.
         """
         heads = [frame.tail(n) for frame in self.frames]
+
+        # creates an html representation of the tables side by side
         tables = (
             ''.join(
                 ('<table><tr style="background-color:white;">',
@@ -172,14 +179,14 @@ class FrameList:
         """
         tables = []
 
+        # appends dataframes out of total and each column's memory usage for each df in self
         for df, name in zip(self.frames, self.names):
             memory = df.memory_usage(deep=True)
             total = pd.Series(memory.sum(), index=[name])
 
-            df = pd.DataFrame(total.append(memory), columns=['Memory'])
+            tables.append(pd.DataFrame(total.append(memory), columns=['Memory']))
 
-            tables.append(df)
-
+        # creates an html representation of the tables side by side
         tables = (
             ''.join(
                 ('<table><tr style="background-color:white;">',
@@ -197,11 +204,13 @@ class FrameList:
         Returns a table which contains the shapes of each df in an HTML cell.
         """
 
+        # getting the shapes and names of each dataframe in self
         shapes_list = [df.shape for df in self.frames]
         names_list = list(self.names)
 
         shapes_df = pd.DataFrame(shapes_list, columns=['rows', 'columns'], index=names_list)
 
+        # creates an html representation of the table
         table = (
             ''.join(
                 ('<table><tr style="background-color:white;">',
