@@ -102,3 +102,43 @@ def readm_json(filepath, df_names=None, chunk_size=None):
         df_list = [read_chunks(i) for i in df_list]
 
     return FrameList(df_list, df_names)
+
+
+def readm_excel(filepath, df_names=None, chunk_size=None):
+    """
+    Reads multiple files in a directory, returns a FrameList
+    If df_names == None, it iterates the whole directory.
+
+    Receives the path and optionally a list of the dataframes names.
+
+    Returns a FrameList
+
+    the folder should have only xlsx files, no .txt
+    """
+    df_list = []
+
+    # Here the function uses the names of the dataframes to read the files
+    if df_names is not None:
+        df_names = np.char.array(df_names)
+        filepath = np.full(df_names.shape, filepath)
+        reader = filepath + df_names + '.xlsx'
+
+        temp_df = [pd.read_excel(i, chunksize=chunk_size) for i in reader]
+        df_list.append(temp_df)
+
+    # If names are not given, the function just reads all data in folder
+    else:
+        df_names = []
+        path, dirs, files = next(os.walk(filepath))
+        file_count = len(files)
+        for i in range(file_count):
+            temp_df = pd.read_excel(filepath + files[i], chunksize=chunk_size)
+            df_list.append(temp_df)
+            df_names.append(files[i][:-5])
+
+    # If chunk_size is given, df_list is actually a list of reader objects,
+    # Let's unpack these objects
+    if chunk_size is not None:
+        df_list = [read_chunks(i) for i in df_list]
+
+    return FrameList(df_list, df_names)

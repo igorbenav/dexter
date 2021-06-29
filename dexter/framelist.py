@@ -163,3 +163,29 @@ class FrameList:
         )
 
         return HTML(f'<tr>{tables}</tr>')
+
+    def memory_usage(self):
+        """
+        Receives a FrameList
+
+        Returns a table which contains each df.memory_usage(deep=True) in an HTML cell.
+        """
+        tables = []
+
+        for df, name in zip(self.frames, self.names):
+            memory = df.memory_usage(deep=True)
+            total = pd.Series(memory.sum(), index=[name])
+
+            df = pd.DataFrame(total.append(memory), columns=['Memory'])
+
+            tables.append(df)
+
+        tables = (
+            ''.join(
+                ('<table><tr style="background-color:white;">',
+                 ''.join([f'<td style="vertical-align:top">' + table._repr_html_() + '</td>' for table in tables]),
+                 '</tr></table>')
+            )
+        )
+
+        return HTML(f'<tr>{tables}</tr>')
