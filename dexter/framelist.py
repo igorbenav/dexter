@@ -189,3 +189,25 @@ class FrameList:
         )
 
         return HTML(f'<tr>{tables}</tr>')
+
+    def shapes(self):
+        """
+        Receives a FrameList
+
+        Returns a table which contains the shapes of each df in an HTML cell.
+        """
+
+        shapes_list = [df.shape for df in self.frames]
+        names_list = list(self.names)
+
+        shapes_df = pd.DataFrame(shapes_list, columns=['rows', 'columns'], index=names_list)
+
+        table = (
+            ''.join(
+                ('<table><tr style="background-color:white;">',
+                 ''.join([f'<td style="vertical-align:top">' + shapes_df._repr_html_() + '</td>']),
+                 '</tr></table>')
+            )
+        )
+
+        return HTML(f'<tr>{table}</tr>')
