@@ -220,3 +220,24 @@ class FrameList:
         )
 
         return HTML(f'<tr>{table}</tr>')
+
+    def nunique(self):
+        """
+        Receives a FrameList
+
+        Returns a table which contains the number of non-null values of each column
+        """
+
+        # getting the count of nunique values for each dataframe in self
+        nunique_list = [pd.DataFrame(df.nunique(), columns=['non-null']) for df in self.frames]
+
+        # creates an html representation of the table
+        table = (
+            ''.join(
+                ('<table><tr style="background-color:white;">',
+                 ''.join([f'<td style="vertical-align:top">' + table._repr_html_() + '</td>' for table in nunique_list]),
+                 '</tr></table>')
+            )
+        )
+
+        return HTML(f'<tr>{table}</tr>')

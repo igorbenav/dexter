@@ -118,6 +118,7 @@ description = dxt.FrameList(dataframes.describe(), names)
 
 - [NumPy](https://www.numpy.org)
 - [Pandas](https://pandas.pydata.org/)
+- [IPython](https://ipython.org/)
 
 ## License
 
