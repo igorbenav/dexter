@@ -93,18 +93,20 @@ frames = dataframes.frames
 
 Multiple Dataframes Types
 ```python
-types = dxt.FrameList(dataframes.dtypes(), names)
+dxt.to_html(dataframes.dtypes())
 ```
 
 Multiple Missing Values
 ```python
-missing = dxt.FrameList(dataframes.multiple_missing(), names)
+dxt.to_html(dataframes.multiple_missing())
 ```
 
 Multiple Descriptions
 ```python
-description = dxt.FrameList(dataframes.describe(), names)
+dxt.to_html(dataframes.describe())
 ```
+
+For more concrete examples, check the [notebook](Example.ipynb)
 
 ## Contributing
 
