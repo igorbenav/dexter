@@ -8,7 +8,7 @@ other containing the dataframes themselves.
 
 import pandas as pd
 import numpy as np
-from IPython.core.display import HTML
+from dexter.helper import to_html
 
 
 class FrameList:
@@ -30,6 +30,8 @@ class FrameList:
     >>> dataframes
     [('df1_name', 'df2_name', 'df3_name'),
     (df1, df2, df3)]
+    _______
+    TODO: Test performance using two tuples vs using dict
     """
     # @property
     # def _constructor(self) -> type(FrameList):
@@ -98,16 +100,8 @@ class FrameList:
         Returns a list of dataframes with each showing the types of each column of each original
         dataframe.
         """
-        df_descriptions_list = []
 
-        for df in self.frames:
-            # checking the types of the columns
-            df_descriptions = df.describe(include='all')
-
-            # finally, a dataframe is created out of this array and appended to the df_types_list
-            df_descriptions_list.append(df_descriptions)
-
-        return df_descriptions_list
+        return [df.describe(include='all') for df in self.frames]
 
     def display(self):
         """
@@ -117,21 +111,14 @@ class FrameList:
 
         Notes
         -----
-        TODO: show the names of each dataframe above it in the future
+        TODO: show the names of each dataframe above it
         """
         # unused for now, will be used to show the names of each dataframe above it
         table_names = [''.join(f'<th style="text-align:center">{name}</th>') for name in self.names]
 
         # creates an html representation of the tables side by side
-        tables = (
-            ''.join(
-                ('<table><tr style="background-color:white;">',
-                 ''.join([f'<td style="vertical-align:top">' + table._repr_html_() + '</td>' for table in self.frames]),
-                 '</tr></table>')
-            )
-        )
 
-        return HTML(f'<tr>{tables}</tr>')
+        return to_html(self.frames)
 
     def head(self, n=5):
         """
@@ -139,43 +126,22 @@ class FrameList:
 
         Returns a table which contains each df.head(n) in an HTML cell.
         """
-        heads = [frame.head(n) for frame in self.frames]
 
-        # creates an html representation of the tables side by side
-        tables = (
-            ''.join(
-                ('<table><tr style="background-color:white;">',
-                 ''.join([f'<td style="vertical-align:top">' + table._repr_html_() + '</td>' for table in heads]),
-                 '</tr></table>')
-            )
-        )
-
-        return HTML(f'<tr>{tables}</tr>')
+        return [frame.head(n) for frame in self.frames]
 
     def tail(self, n=5):
         """
         Receives a FrameList
 
-        Returns a table which contains each df.tail(n) in an HTML cell.
+        Returns a table which contains each df.tail(n).
         """
-        heads = [frame.tail(n) for frame in self.frames]
-
-        # creates an html representation of the tables side by side
-        tables = (
-            ''.join(
-                ('<table><tr style="background-color:white;">',
-                 ''.join([f'<td style="vertical-align:top">' + table._repr_html_() + '</td>' for table in heads]),
-                 '</tr></table>')
-            )
-        )
-
-        return HTML(f'<tr>{tables}</tr>')
+        return [frame.tail(n) for frame in self.frames]
 
     def memory_usage(self):
         """
         Receives a FrameList
 
-        Returns a table which contains each df.memory_usage(deep=True) in an HTML cell.
+        Returns a table which contains each df.memory_usage(deep=True).
         """
         tables = []
 
@@ -186,22 +152,13 @@ class FrameList:
 
             tables.append(pd.DataFrame(total.append(memory), columns=['Memory']))
 
-        # creates an html representation of the tables side by side
-        tables = (
-            ''.join(
-                ('<table><tr style="background-color:white;">',
-                 ''.join([f'<td style="vertical-align:top">' + table._repr_html_() + '</td>' for table in tables]),
-                 '</tr></table>')
-            )
-        )
-
-        return HTML(f'<tr>{tables}</tr>')
+        return tables
 
     def shapes(self):
         """
         Receives a FrameList
 
-        Returns a table which contains the shapes of each df in an HTML cell.
+        Returns a table which contains the shapes of each df.
         """
 
         # getting the shapes and names of each dataframe in self
@@ -210,16 +167,7 @@ class FrameList:
 
         shapes_df = pd.DataFrame(shapes_list, columns=['rows', 'columns'], index=names_list)
 
-        # creates an html representation of the table
-        table = (
-            ''.join(
-                ('<table><tr style="background-color:white;">',
-                 ''.join([f'<td style="vertical-align:top">' + shapes_df._repr_html_() + '</td>']),
-                 '</tr></table>')
-            )
-        )
-
-        return HTML(f'<tr>{table}</tr>')
+        return [shapes_df]
 
     def nunique(self):
         """
@@ -229,15 +177,4 @@ class FrameList:
         """
 
         # getting the count of nunique values for each dataframe in self
-        nunique_list = [pd.DataFrame(df.nunique(), columns=['non-null']) for df in self.frames]
-
-        # creates an html representation of the table
-        table = (
-            ''.join(
-                ('<table><tr style="background-color:white;">',
-                 ''.join([f'<td style="vertical-align:top">' + table._repr_html_() + '</td>' for table in nunique_list]),
-                 '</tr></table>')
-            )
-        )
-
-        return HTML(f'<tr>{table}</tr>')
+        return [pd.DataFrame(df.nunique(), columns=['non-null']) for df in self.frames]
