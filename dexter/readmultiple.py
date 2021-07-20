@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import os
-from dexter.framelist import FrameList
+from dexter.framemap import FrameMap
 
 
 def read_chunks(df_chunk):
@@ -26,12 +26,12 @@ def read_chunks(df_chunk):
 
 def readm_csv(filepath, df_names=None, chunksize=None):
     """
-    Reads multiple files in a directory, returns a FrameList
+    Reads multiple files in a directory, returns a FrameMap
     If df_names == None, it iterates the whole directory.
 
     Receives the path and optionally a list of the dataframes names.
 
-    Returns a FrameList
+    Returns a FrameMap
 
     the folder should have only csv files, no .txt
     """
@@ -61,17 +61,17 @@ def readm_csv(filepath, df_names=None, chunksize=None):
     if chunksize is not None:
         df_list = [read_chunks(i) for i in df_list]
 
-    return FrameList(df_list, df_names)
+    return FrameMap(df_list, df_names)
 
 
 def readm_json(filepath, df_names=None, chunk_size=None):
     """
-    Reads multiple files in a directory, returns a FrameList
+    Reads multiple files in a directory, returns a FrameMap
     If df_names == None, it iterates the whole directory.
 
     Receives the path and optionally a list of the dataframes names.
 
-    Returns a FrameList
+    Returns a FrameMap
 
     the folder should have only json files, no .txt
     """
@@ -101,17 +101,17 @@ def readm_json(filepath, df_names=None, chunk_size=None):
     if chunk_size is not None:
         df_list = [read_chunks(i) for i in df_list]
 
-    return FrameList(df_list, df_names)
+    return FrameMap(df_list, df_names)
 
 
 def readm_excel(filepath, df_names=None, chunk_size=None):
     """
-    Reads multiple files in a directory, returns a FrameList
+    Reads multiple files in a directory, returns a FrameMap
     If df_names == None, it iterates the whole directory.
 
     Receives the path and optionally a list of the dataframes names.
 
-    Returns a FrameList
+    Returns a FrameMap
 
     the folder should have only xlsx files, no .txt
     """
@@ -141,4 +141,4 @@ def readm_excel(filepath, df_names=None, chunk_size=None):
     if chunk_size is not None:
         df_list = [read_chunks(i) for i in df_list]
 
-    return FrameList(df_list, df_names)
+    return FrameMap(df_list, df_names)

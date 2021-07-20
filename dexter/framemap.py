@@ -1,17 +1,17 @@
 """
-FrameList
+FrameMap
 ---------
-Data in the form of a list of two tuples, one containing the names of dataframes and
-other containing the dataframes themselves.
+Data in the form of a dictionary of dataframes, the keys are the names of the dataframes.
 
 """
 
 import pandas as pd
 import numpy as np
-from dexter.helper import to_html
+from dexter.framelist import FrameList
+from dexter.helper import _to_html_str_, _to_html_
 
 
-class FrameList:
+class FrameMap(dict):
     """
     Data in the form of a list of two tuples, one containing the names of dataframes and
     other containing the dataframes themselves.
@@ -26,16 +26,13 @@ class FrameList:
 
     Example
     -------
-    >>> dataframes = FrameList([df1, df2, df3], ['df1_name', 'df2_name', 'df3_name'])
+    >>> dataframes = FrameMap([df1, df2, df3], ['df1_name', 'df2_name', 'df3_name'])
     >>> dataframes
-    [('df1_name', 'df2_name', 'df3_name'),
-    (df1, df2, df3)]
     _______
-    TODO: Test performance using two tuples vs using dict
     """
     # @property
-    # def _constructor(self) -> type(FrameList):
-    #     return FrameList
+    # def _constructor(self) -> type(FrameMap):
+    #     return FrameMap
 
     # ------------ Constructors ------------
 
@@ -45,14 +42,31 @@ class FrameList:
             names=None
     ):
 
+        super().__init__()
+
         self.frames = frames
         self.names = names
         if names is None:
             self.names = range(len(frames))
 
+        for frame, name in zip(frames, names):
+            self[str(name)] = frame
+
+    def __getattr__(self, key):
+        return self.get(key)
+
+    def __setattr__(self, key, value):
+        self[key] = value
+
+    def _repr_html_(self):
+        """
+        Return a HTML representation for a FrameMap
+        """
+        return _to_html_str_(self.frames)
+
     def dtypes(self):
         """
-        Receives a FrameList.
+        Receives a FrameMap.
 
         Returns a list of dataframes with each showing the types of each column of each original
         dataframe.
@@ -69,11 +83,11 @@ class FrameList:
             # finally, a dataframe is created out of this array and appended to the df_types_list
             df_types_list.append(pd.DataFrame([types_df[1]], columns=types_df[0], index=['type']))
 
-        return df_types_list
+        return FrameList(df_types_list)
 
     def multiple_missing(self):
         """
-        Receives FrameList.
+        Receives FrameMap.
 
         Returns a list of dataframes with each showing the amount of missing values from each
         column of each original dataframe.
@@ -91,21 +105,21 @@ class FrameList:
             missing_values_df_list.append(
                 pd.DataFrame([missing_values_df[1]], columns=missing_values_df[0], index=['missing']))
 
-        return missing_values_df_list
+        return FrameList(missing_values_df_list)
 
     def describe(self):
         """
-        Receives a FrameList.
+        Receives a FrameMap.
 
         Returns a list of dataframes with each showing the types of each column of each original
         dataframe.
         """
 
-        return [df.describe(include='all') for df in self.frames]
+        return FrameList([df.describe(include='all') for df in self.frames])
 
     def display(self):
         """
-        Receives a FrameList .
+        Receives a FrameMap.
 
         Returns a table which contains each IpyTable in an HTML cell.
 
@@ -118,28 +132,28 @@ class FrameList:
 
         # creates an html representation of the tables side by side
 
-        return to_html(self.frames)
+        return _to_html_(self.frames)
 
     def head(self, n=5):
         """
-        Receives a FrameList
+        Receives a FrameMap.
 
         Returns a table which contains each df.head(n) in an HTML cell.
         """
 
-        return [frame.head(n) for frame in self.frames]
+        return FrameList([frame.head(n) for frame in self.frames])
 
     def tail(self, n=5):
         """
-        Receives a FrameList
+        Receives a FrameMap.
 
         Returns a table which contains each df.tail(n).
         """
-        return [frame.tail(n) for frame in self.frames]
+        return FrameList([frame.tail(n) for frame in self.frames])
 
     def memory_usage(self):
         """
-        Receives a FrameList
+        Receives a FrameMap.
 
         Returns a table which contains each df.memory_usage(deep=True).
         """
@@ -152,11 +166,11 @@ class FrameList:
 
             tables.append(pd.DataFrame(total.append(memory), columns=['Memory']))
 
-        return tables
+        return FrameList(tables)
 
     def shapes(self):
         """
-        Receives a FrameList
+        Receives a FrameMap.
 
         Returns a table which contains the shapes of each df.
         """
@@ -167,14 +181,14 @@ class FrameList:
 
         shapes_df = pd.DataFrame(shapes_list, columns=['rows', 'columns'], index=names_list)
 
-        return [shapes_df]
+        return FrameList([shapes_df])
 
     def nunique(self):
         """
-        Receives a FrameList
+        Receives a FrameMap.
 
         Returns a table which contains the number of non-null values of each column
         """
 
         # getting the count of nunique values for each dataframe in self
-        return [pd.DataFrame(df.nunique(), columns=['non-null']) for df in self.frames]
+        return FrameList([pd.DataFrame(df.nunique(), columns=['non-null']) for df in self.frames])

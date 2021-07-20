@@ -12,6 +12,8 @@ composed of multiple dataframes.
 ## Features
 
   - Importing multiple table files with **readm_csv()**
+  - Saving DataFrames and Names with the **FrameMap** class
+  - Applying pandas methods to multiple DataFrames at once
 
 ## Installing
 
@@ -93,17 +95,17 @@ frames = dataframes.frames
 
 Multiple Dataframes Types
 ```python
-dxt.to_html(dataframes.dtypes())
+dataframes.dtypes()
 ```
 
 Multiple Missing Values
 ```python
-dxt.to_html(dataframes.multiple_missing())
+dataframes.multiple_missing()
 ```
 
 Multiple Descriptions
 ```python
-dxt.to_html(dataframes.describe())
+dataframes.describe()
 ```
 
 For more concrete examples, check the [notebook](Example.ipynb)

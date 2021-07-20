@@ -1,7 +1,7 @@
 from IPython.core.display import HTML
 
 
-def to_html(df_list):
+def _to_html_str_(df_list):
     """
     Receives a list of dataframes
 
@@ -15,4 +15,13 @@ def to_html(df_list):
         )
     )
 
-    return HTML(f'<tr>{tables}</tr>')
+    return f'<tr>{tables}</tr>'
+
+
+def _to_html_(df_list):
+    """
+    Receives a list of dataframes
+
+    Returns a html table with each dataframe side by side
+    """
+    return HTML(_to_html_str_(df_list))
