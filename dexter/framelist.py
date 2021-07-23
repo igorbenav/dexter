@@ -2,11 +2,11 @@
 FrameList
 ---------
 Data in the form of a list of dataframes.
+TODO: Document better parameters and return types such as def function(parameter: type) -> return type
 
 """
 
 from dexter.helper import _to_html_str_
-from typing import List
 
 
 class FrameList(list):

@@ -2,12 +2,12 @@
 FrameMap
 ---------
 Data in the form of a dictionary of dataframes, the keys are the names of the dataframes.
+TODO: Document better parameters and return types such as def function(parameter: type) -> return type
 
 """
 
 import pandas as pd
 import numpy as np
-from dexter.framelist import FrameList
 from dexter.helper import _to_html_str_, _to_html_
 
 

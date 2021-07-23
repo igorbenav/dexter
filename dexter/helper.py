@@ -1,4 +1,5 @@
 from IPython.core.display import HTML
+# TODO: Document better parameters and return types such as def function(parameter: type) -> return type
 
 
 def _to_html_str_(df_list):
