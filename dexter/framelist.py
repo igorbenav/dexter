@@ -6,6 +6,7 @@ Data in the form of a list of dataframes.
 """
 
 from dexter.helper import _to_html_str_
+from typing import List
 
 
 class FrameList(list):
@@ -26,6 +27,6 @@ class FrameList(list):
 
     def _repr_html_(self):
         """
-        Return a HTML representation for a FrameMap
+        Return a HTML representation for a FrameList
         """
         return _to_html_str_(self)

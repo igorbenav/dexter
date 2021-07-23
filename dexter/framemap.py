@@ -30,6 +30,7 @@ class FrameMap(dict):
     >>> dataframes
     _______
     """
+
     # @property
     # def _constructor(self) -> type(FrameMap):
     #     return FrameMap
@@ -39,14 +40,14 @@ class FrameMap(dict):
     def __init__(
             self,
             frames,
-            names=None
+            names=[]
     ):
 
         super().__init__()
 
         self.frames = frames
         self.names = names
-        if names is None:
+        if not names:
             self.names = range(len(frames))
 
         for frame, name in zip(frames, names):
@@ -83,7 +84,7 @@ class FrameMap(dict):
             # finally, a dataframe is created out of this array and appended to the df_types_list
             df_types_list.append(pd.DataFrame([types_df[1]], columns=types_df[0], index=['type']))
 
-        return FrameList(df_types_list)
+        return FrameMap(df_types_list, self.names)
 
     def multiple_missing(self):
         """
@@ -105,7 +106,7 @@ class FrameMap(dict):
             missing_values_df_list.append(
                 pd.DataFrame([missing_values_df[1]], columns=missing_values_df[0], index=['missing']))
 
-        return FrameList(missing_values_df_list)
+            return FrameMap(missing_values_df_list, self.names)
 
     def describe(self):
         """
@@ -115,7 +116,7 @@ class FrameMap(dict):
         dataframe.
         """
 
-        return FrameList([df.describe(include='all') for df in self.frames])
+        return FrameMap([df.describe(include='all') for df in self.frames], self.names)
 
     def display(self):
         """
@@ -141,7 +142,7 @@ class FrameMap(dict):
         Returns a table which contains each df.head(n) in an HTML cell.
         """
 
-        return FrameList([frame.head(n) for frame in self.frames])
+        return FrameMap([frame.head(n) for frame in self.frames], self.names)
 
     def tail(self, n=5):
         """
@@ -149,7 +150,7 @@ class FrameMap(dict):
 
         Returns a table which contains each df.tail(n).
         """
-        return FrameList([frame.tail(n) for frame in self.frames])
+        return FrameMap([frame.tail(n) for frame in self.frames], self.names)
 
     def memory_usage(self):
         """
@@ -166,7 +167,7 @@ class FrameMap(dict):
 
             tables.append(pd.DataFrame(total.append(memory), columns=['Memory']))
 
-        return FrameList(tables)
+        return FrameMap(tables, self.names)
 
     def shapes(self):
         """
@@ -181,7 +182,7 @@ class FrameMap(dict):
 
         shapes_df = pd.DataFrame(shapes_list, columns=['rows', 'columns'], index=names_list)
 
-        return FrameList([shapes_df])
+        return FrameMap([shapes_df], self.names)
 
     def nunique(self):
         """
@@ -191,4 +192,4 @@ class FrameMap(dict):
         """
 
         # getting the count of nunique values for each dataframe in self
-        return FrameList([pd.DataFrame(df.nunique(), columns=['non-null']) for df in self.frames])
+        return FrameMap([pd.DataFrame(df.nunique(), columns=['non-null']) for df in self.frames], self.names)
