@@ -9,6 +9,7 @@ TODO: Document better parameters and return types such as def function(parameter
 import pandas as pd
 import numpy as np
 from dexter.helper import _to_html_str_, _to_html_
+import dexter.optimizer
 
 
 class FrameMap(dict):
@@ -193,3 +194,11 @@ class FrameMap(dict):
 
         # getting the count of nunique values for each dataframe in self
         return FrameMap([pd.DataFrame(df.nunique(), columns=['non-null']) for df in self.frames], self.names)
+
+    def optimize(self):
+        """
+        Receives a dataframe
+
+        Returns a FrameMap with all dataframes column types converted to the smallest possible type
+        """
+        return FrameMap([dexter.optimizer.optimize(df) for df in self.frames], self.names)
