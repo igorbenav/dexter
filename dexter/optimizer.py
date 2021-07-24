@@ -1,7 +1,8 @@
 import pandas as pd
+from typing import List
 
 
-def optimize(df: pd.DataFrame, datetime_features=None) -> pd.DataFrame:
+def optimize(df: pd.DataFrame, datetime_features: List[str] = None) -> pd.DataFrame:
     """
     Receives a dataframe
 

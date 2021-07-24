@@ -2,7 +2,6 @@
 FrameList
 ---------
 Data in the form of a list of dataframes.
-TODO: Document better parameters and return types such as def function(parameter: type) -> return type
 
 """
 
@@ -25,7 +24,7 @@ class FrameList(list):
     _______
     """
 
-    def _repr_html_(self):
+    def _repr_html_(self) -> str:
         """
         Return a HTML representation for a FrameList
         """

@@ -2,10 +2,9 @@
 FrameMap
 ---------
 Data in the form of a dictionary of dataframes, the keys are the names of the dataframes.
-TODO: Document better parameters and return types such as def function(parameter: type) -> return type
 
 """
-
+from typing import List
 import pandas as pd
 import numpy as np
 from dexter.helper import _to_html_str_, _to_html_
@@ -40,8 +39,8 @@ class FrameMap(dict):
 
     def __init__(
             self,
-            frames,
-            names=[]
+            frames: List[pd.DataFrame],
+            names: List[str] = []
     ):
 
         super().__init__()
@@ -54,19 +53,19 @@ class FrameMap(dict):
         for frame, name in zip(frames, names):
             self[str(name)] = frame
 
-    def __getattr__(self, key):
+    def __getattr__(self, key: str):
         return self.get(key)
 
-    def __setattr__(self, key, value):
+    def __setattr__(self, key: str, value: pd.DataFrame) -> pd.DataFrame:
         self[key] = value
 
-    def _repr_html_(self):
+    def _repr_html_(self) -> str:
         """
         Return a HTML representation for a FrameMap
         """
         return _to_html_str_(self.frames)
 
-    def dtypes(self):
+    def dtypes(self) -> 'FrameMap':
         """
         Receives a FrameMap.
 
@@ -87,7 +86,7 @@ class FrameMap(dict):
 
         return FrameMap(df_types_list, self.names)
 
-    def multiple_missing(self):
+    def multiple_missing(self) -> 'FrameMap':
         """
         Receives FrameMap.
 
@@ -109,7 +108,7 @@ class FrameMap(dict):
 
             return FrameMap(missing_values_df_list, self.names)
 
-    def describe(self):
+    def describe(self) -> 'FrameMap':
         """
         Receives a FrameMap.
 
@@ -119,7 +118,7 @@ class FrameMap(dict):
 
         return FrameMap([df.describe(include='all') for df in self.frames], self.names)
 
-    def display(self):
+    def display(self) -> 'IPython.core.display.HTML':
         """
         Receives a FrameMap.
 
@@ -136,7 +135,7 @@ class FrameMap(dict):
 
         return _to_html_(self.frames)
 
-    def head(self, n=5):
+    def head(self, n: int = 5) -> 'FrameMap':
         """
         Receives a FrameMap.
 
@@ -145,7 +144,7 @@ class FrameMap(dict):
 
         return FrameMap([frame.head(n) for frame in self.frames], self.names)
 
-    def tail(self, n=5):
+    def tail(self, n: int = 5) -> 'FrameMap':
         """
         Receives a FrameMap.
 
@@ -153,7 +152,7 @@ class FrameMap(dict):
         """
         return FrameMap([frame.tail(n) for frame in self.frames], self.names)
 
-    def memory_usage(self):
+    def memory_usage(self) -> 'FrameMap':
         """
         Receives a FrameMap.
 
@@ -170,7 +169,7 @@ class FrameMap(dict):
 
         return FrameMap(tables, self.names)
 
-    def shapes(self):
+    def shapes(self) -> 'FrameMap':
         """
         Receives a FrameMap.
 
@@ -185,7 +184,7 @@ class FrameMap(dict):
 
         return FrameMap([shapes_df], self.names)
 
-    def nunique(self):
+    def nunique(self) -> 'FrameMap':
         """
         Receives a FrameMap.
 
@@ -195,7 +194,7 @@ class FrameMap(dict):
         # getting the count of nunique values for each dataframe in self
         return FrameMap([pd.DataFrame(df.nunique(), columns=['non-null']) for df in self.frames], self.names)
 
-    def optimize(self):
+    def optimize(self) -> 'FrameMap':
         """
         Receives a dataframe
 
