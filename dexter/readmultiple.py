@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import os
 from dexter.framemap import FrameMap
+# TODO: optimize before appending to df_list
 
 
 def read_chunks(df_chunk):
@@ -24,10 +25,11 @@ def read_chunks(df_chunk):
     return df
 
 
-def readm_csv(filepath, df_names=None, chunksize=None):
+def readm_csv(filepath, df_names=None, chunksize=None, optimize=False):
     """
     Reads multiple files in a directory, returns a FrameMap
     If df_names == None, it iterates the whole directory.
+    If optimize == True, returns a memory optimized version
 
     Receives the path and optionally a list of the dataframes names.
 
@@ -61,13 +63,20 @@ def readm_csv(filepath, df_names=None, chunksize=None):
     if chunksize is not None:
         df_list = [read_chunks(i) for i in df_list]
 
-    return FrameMap(df_list, df_names)
+    framemap = FrameMap(df_list, df_names)
+
+    # return memory optimized version if selected
+    if optimize:
+        framemap = framemap.optimize()
+
+    return framemap
 
 
-def readm_json(filepath, df_names=None, chunk_size=None):
+def readm_json(filepath, df_names=None, chunk_size=None, optimize=False):
     """
     Reads multiple files in a directory, returns a FrameMap
     If df_names == None, it iterates the whole directory.
+    If optimize == True, returns a memory optimized version
 
     Receives the path and optionally a list of the dataframes names.
 
@@ -101,13 +110,20 @@ def readm_json(filepath, df_names=None, chunk_size=None):
     if chunk_size is not None:
         df_list = [read_chunks(i) for i in df_list]
 
-    return FrameMap(df_list, df_names)
+    framemap = FrameMap(df_list, df_names)
+
+    # return memory optimized version if selected
+    if optimize:
+        framemap = framemap.optimize()
+
+    return framemap
 
 
-def readm_excel(filepath, df_names=None, chunk_size=None):
+def readm_excel(filepath, df_names=None, chunk_size=None, optimize=False):
     """
     Reads multiple files in a directory, returns a FrameMap
     If df_names == None, it iterates the whole directory.
+    If optimize == True, returns a memory optimized version
 
     Receives the path and optionally a list of the dataframes names.
 
@@ -141,4 +157,11 @@ def readm_excel(filepath, df_names=None, chunk_size=None):
     if chunk_size is not None:
         df_list = [read_chunks(i) for i in df_list]
 
-    return FrameMap(df_list, df_names)
+    framemap = FrameMap(df_list, df_names)
+
+    # return memory optimized version if selected
+    if optimize:
+        framemap = framemap.optimize()
+
+    return framemap
+
