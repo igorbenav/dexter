@@ -5,6 +5,16 @@
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/
 
+# Compiled python modules.
+*.pyc
+
+# Setuptools distribution folder.
+/dist/
+build/
+
+# Python egg metadata, regenerated from source files by setuptools.
+/*.egg-info
+
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
 

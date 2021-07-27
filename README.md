@@ -17,7 +17,10 @@ composed of multiple dataframes.
 
 ## Installing
 
-Not available for installing yet, but available for download and import at: https://github.com/igormagalhaesr/dexter
+PyPI:
+```sh
+pip install dxter
+```
 
 ## Usage 
 
