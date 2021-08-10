@@ -48,7 +48,7 @@ class FrameMap(dict):
         self.frames = frames
         self.names = names
         if not names:
-            self.names = range(len(frames))
+            self.names = [str(i) for i in range(len(frames))]
 
         for frame, name in zip(frames, names):
             self[str(name)] = frame
@@ -56,7 +56,7 @@ class FrameMap(dict):
     def __getattr__(self, key: str):
         return self.get(key)
 
-    def __setattr__(self, key: str, value: pd.DataFrame) -> pd.DataFrame:
+    def __setattr__(self, key: str, value: pd.DataFrame) -> None:
         self[key] = value
 
     def _repr_html_(self) -> str:
@@ -196,8 +196,32 @@ class FrameMap(dict):
 
     def optimize(self) -> 'FrameMap':
         """
-        Receives a dataframe
+        Receives a FrameMap
 
         Returns a FrameMap with all dataframes column types converted to the smallest possible type
         """
         return FrameMap([dexter.optimizer.optimize(df) for df in self.frames], self.names)
+
+    def to_csv(self, names=None) -> None:
+        """
+        Receives a FrameMap
+
+        Generates a csv file for each of the dataframes with its name.
+        """
+        if not names:
+            names = self.names
+
+        for frame, name in zip(self.frames, names):
+            frame.to_csv(name + '.csv')
+
+    def to_excel(self, names=None) -> None:
+        """
+        Receives a FrameMap
+
+        Generates a xlsx file for each of the dataframes with its name.
+        """
+        if not names:
+            names = self.names
+
+        for frame, name in zip(self.frames, names):
+            frame.to_excel(name + '.xlsx')
