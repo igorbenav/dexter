@@ -225,3 +225,15 @@ class FrameMap(dict):
 
         for frame, name in zip(self.frames, names):
             frame.to_excel(name + '.xlsx')
+
+    def to_pickle(self, names=None) -> None:
+        """
+        Receives a FrameMap
+
+        Generates a xlsx file for each of the dataframes with its name.
+        """
+        if not names:
+            names = self.names
+
+        for frame, name in zip(self.frames, names):
+            frame.to_pickle(name + '.pkl')
