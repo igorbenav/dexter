@@ -237,3 +237,15 @@ class FrameMap(dict):
 
         for frame, name in zip(self.frames, names):
             frame.to_pickle(name + '.pkl')
+
+    def to_parquet(self, names=None) -> None:
+        """
+        Receives a FrameMap
+
+        Generates a parquet file for each of the dataframes with its name.
+        """
+        if not names:
+            names = self.names
+
+        for frame, name in zip(self.frames, names):
+            frame.to_parquet(name + '.parquet')

@@ -162,7 +162,7 @@ def readm_excel(filepath: str, df_names: List[str] = None, optimize: bool = Fals
     return framemap
 
 
-def readm_pickle(filepath: str, df_names: List[str] = None, optimize: bool = False):
+def readm_pickle(filepath: str, df_names: List[str] = None, optimize: bool = False) -> FrameMap:
     """
     Reads multiple files in a directory, returns a FrameMap
     If df_names == None, it iterates the whole directory.
@@ -194,6 +194,48 @@ def readm_pickle(filepath: str, df_names: List[str] = None, optimize: bool = Fal
             temp_df = pd.read_pickle(filepath + files[i])
             df_list.append(temp_df)
             df_names.append(files[i][:-4])
+
+    framemap = FrameMap(df_list, df_names)
+
+    # return memory optimized version if selected
+    if optimize:
+        framemap = framemap.optimize()
+
+    return framemap
+
+
+def readm_parquet(filepath: str, df_names: List[str] = None, optimize: bool = False) -> FrameMap:
+    """
+    Reads multiple files in a directory, returns a FrameMap
+    If df_names == None, it iterates the whole directory.
+    If optimize == True, returns a memory optimized version
+
+    Receives the path and optionally a list of the dataframes names.
+
+    Returns a FrameMap
+
+    the folder should have only parquet files, no .txt
+    """
+    df_list = []
+
+    # Here the function uses the names of the dataframes to read the files
+    if df_names is not None:
+        df_names = np.char.array(df_names)
+        filepath = np.full(df_names.shape, filepath)
+        reader = filepath + df_names + '.parquet'
+
+        temp_df = [pd.read_parquet(i) for i in reader]
+        df_list.append(temp_df)
+
+    # If names are not given, the function just reads all data in folder
+    else:
+        df_names = []
+        path, dirs, files = next(os.walk(filepath))
+        file_count = len(files)
+        for i in range(file_count):
+            temp_df = pd.read_parquet(filepath + files[i])
+            df_list.append(temp_df)
+            df_names.append(files[i][:-8])
 
     framemap = FrameMap(df_list, df_names)
 
