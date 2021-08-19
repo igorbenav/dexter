@@ -14,13 +14,7 @@ def read_chunks(df_chunk) -> pd.DataFrame:
 
     Returns the dataframe
     """
-    chunk_list = []
-
-    for chunk in df_chunk:
-        # chunk_filter = chunk_preprocessing(chunk)
-        # chunk_list.append(chunk_filter)
-        chunk_list.append(chunk)
-
+    chunk_list = [chunk for chunk in df_chunk]
     df = pd.concat(chunk_list)
 
     return df
@@ -46,8 +40,7 @@ def readm_csv(filepath: str, df_names: List[str] = None, chunksize: int = None, 
         filepath = np.full(df_names.shape, filepath)
         reader = filepath + df_names + '.csv'
 
-        temp_df = [pd.read_csv(i, chunksize=chunksize) for i in reader]
-        df_list.append(temp_df)
+        df_list = [pd.read_csv(i, chunksize=chunksize) for i in reader]
 
     # If names are not given, the function just reads all data in folder
     else:
@@ -93,8 +86,7 @@ def readm_json(filepath: str, df_names: List[str] = None, chunksize: int = None,
         filepath = np.full(df_names.shape, filepath)
         reader = filepath + df_names + '.json'
 
-        temp_df = [pd.read_json(i, chunksize=chunksize) for i in reader]
-        df_list.append(temp_df)
+        df_list = [pd.read_json(i, chunksize=chunksize) for i in reader]
 
     # If names are not given, the function just reads all data in folder
     else:
@@ -140,8 +132,7 @@ def readm_excel(filepath: str, df_names: List[str] = None, optimize: bool = Fals
         filepath = np.full(df_names.shape, filepath)
         reader = filepath + df_names + '.xlsx'
 
-        temp_df = [pd.read_excel(i) for i in reader]
-        df_list.append(temp_df)
+        df_list = [pd.read_excel(i) for i in reader]
 
     # If names are not given, the function just reads all data in folder
     else:
@@ -182,8 +173,7 @@ def readm_pickle(filepath: str, df_names: List[str] = None, optimize: bool = Fal
         filepath = np.full(df_names.shape, filepath)
         reader = filepath + df_names + '.pkl'
 
-        temp_df = [pd.read_pickle(i) for i in reader]
-        df_list.append(temp_df)
+        df_list = [pd.read_pickle(i) for i in reader]
 
     # If names are not given, the function just reads all data in folder
     else:
@@ -224,8 +214,7 @@ def readm_parquet(filepath: str, df_names: List[str] = None, optimize: bool = Fa
         filepath = np.full(df_names.shape, filepath)
         reader = filepath + df_names + '.parquet'
 
-        temp_df = [pd.read_parquet(i) for i in reader]
-        df_list.append(temp_df)
+        df_list = [pd.read_parquet(i) for i in reader]
 
     # If names are not given, the function just reads all data in folder
     else:
