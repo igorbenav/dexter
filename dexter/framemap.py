@@ -65,6 +65,22 @@ class FrameMap(dict):
         """
         return _to_html_str_(self.frames)
 
+    def rename_frames(self, new_names: list[str]) -> None:
+        """
+        Renames the dataframes in a framemap by using a list of the new names
+        if a new name is None, uses the old name
+        """
+        # uses old name if new_name given is None
+        new_names = [self.names[i] if not new_names[i] else new_names[i] for i in range(len(self.names))]
+
+        for name, frame in zip(self.names, self.frames):
+            if name in self.names:
+                del self[name]
+
+            self[name] = frame
+
+        self.names = new_names
+
     def dtypes(self) -> 'FrameMap':
         """
         Receives a FrameMap.
