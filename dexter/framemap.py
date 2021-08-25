@@ -69,6 +69,10 @@ class FrameMap(dict):
         """
         Renames the dataframes in a framemap by using a list of the new names
         if a new name is None, uses the old name
+
+        Parameters
+        ----------
+        new_names : list[str], default None
         """
         # uses old name if new_name given is None
         new_names = [self.names[i] if not new_names[i] else new_names[i] for i in range(len(self.names))]
@@ -84,9 +88,12 @@ class FrameMap(dict):
     def dtypes(self) -> 'FrameMap':
         """
         Receives a FrameMap.
-
         Returns a list of dataframes with each showing the types of each column of each original
         dataframe.
+
+        Returns
+        -------
+        FrameMap
         """
         df_types_list = []
 
@@ -108,6 +115,10 @@ class FrameMap(dict):
 
         Returns a list of dataframes with each showing the amount of missing values from each
         column of each original dataframe.
+
+        Returns
+        -------
+        list[pd.DataFrame]
         """
         missing_values_df_list = []
 
@@ -127,9 +138,12 @@ class FrameMap(dict):
     def describe(self) -> 'FrameMap':
         """
         Receives a FrameMap.
-
         Returns a list of dataframes with each showing the types of each column of each original
         dataframe.
+
+        Returns
+        -------
+        FrameMap
         """
 
         return FrameMap([df.describe(include='all') for df in self.frames], self.names)
@@ -137,13 +151,14 @@ class FrameMap(dict):
     def display(self) -> 'IPython.core.display.HTML':
         """
         Receives a FrameMap.
-
         Returns a table which contains each IpyTable in an HTML cell.
 
-        Notes
-        -----
-        TODO: show the names of each dataframe above it
+        Returns
+        -------
+        IPython.core.display.HTML
         """
+
+        # TODO: show the names of each dataframe above it
         # unused for now, will be used to show the names of each dataframe above it
         table_names = [''.join(f'<th style="text-align:center">{name}</th>') for name in self.names]
 
@@ -154,8 +169,15 @@ class FrameMap(dict):
     def head(self, n: int = 5) -> 'FrameMap':
         """
         Receives a FrameMap.
-
         Returns a table which contains each df.head(n) in an HTML cell.
+
+        Parameters
+        ----------
+        n : int, default 5
+
+        Returns
+        -------
+        FrameMap
         """
 
         return FrameMap([frame.head(n) for frame in self.frames], self.names)
@@ -163,16 +185,26 @@ class FrameMap(dict):
     def tail(self, n: int = 5) -> 'FrameMap':
         """
         Receives a FrameMap.
-
         Returns a table which contains each df.tail(n).
+
+        Parameters
+        ----------
+        n : int, default 5
+
+        Returns
+        -------
+        FrameMap
         """
         return FrameMap([frame.tail(n) for frame in self.frames], self.names)
 
     def memory_usage(self) -> 'FrameMap':
         """
         Receives a FrameMap.
-
         Returns a table which contains each df.memory_usage(deep=True).
+
+        Returns
+        -------
+        FrameMap
         """
         tables = []
 
@@ -188,8 +220,11 @@ class FrameMap(dict):
     def shapes(self) -> 'FrameMap':
         """
         Receives a FrameMap.
-
         Returns a table which contains the shapes of each df.
+
+        Returns
+        -------
+        FrameMap
         """
 
         # getting the shapes and names of each dataframe in self
@@ -203,8 +238,11 @@ class FrameMap(dict):
     def nunique(self) -> 'FrameMap':
         """
         Receives a FrameMap.
-
         Returns a table which contains the number of non-null values of each column
+
+        Returns
+        -------
+        FrameMap
         """
 
         # getting the count of nunique values for each dataframe in self
@@ -213,16 +251,22 @@ class FrameMap(dict):
     def optimize(self) -> 'FrameMap':
         """
         Receives a FrameMap
-
         Returns a FrameMap with all dataframes column types converted to the smallest possible type
+
+        Returns
+        -------
+        FrameMap
         """
         return FrameMap([dexter.optimizer.optimize(df) for df in self.frames], self.names)
 
     def to_csv(self, names=None) -> None:
         """
         Receives a FrameMap
-
         Generates a csv file for each of the dataframes with its name.
+
+        Parameters
+        ----------
+        names : list[str], default None
         """
         if not names:
             names = self.names
@@ -233,8 +277,11 @@ class FrameMap(dict):
     def to_excel(self, names=None) -> None:
         """
         Receives a FrameMap
-
         Generates a xlsx file for each of the dataframes with its name.
+
+        Parameters
+        ----------
+        names : list[str], default None
         """
         if not names:
             names = self.names
@@ -245,8 +292,11 @@ class FrameMap(dict):
     def to_pickle(self, names=None) -> None:
         """
         Receives a FrameMap
-
         Generates a xlsx file for each of the dataframes with its name.
+
+        Parameters
+        ----------
+        names : list[str], default None
         """
         if not names:
             names = self.names
@@ -257,8 +307,11 @@ class FrameMap(dict):
     def to_parquet(self, names=None) -> None:
         """
         Receives a FrameMap
-
         Generates a parquet file for each of the dataframes with its name.
+
+        Parameters
+        ----------
+        names : list[str], default None
         """
         if not names:
             names = self.names

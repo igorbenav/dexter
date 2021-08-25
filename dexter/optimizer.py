@@ -5,8 +5,18 @@ from typing import List
 def optimize(df: pd.DataFrame, datetime_features: List[str] = None) -> pd.DataFrame:
     """
     Receives a dataframe
-
     Returns a dataframe with column types converted to the smallest possible type
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        the pandas dataframe to be optimized
+    datetime_features : List[str] default None
+        list of features that can be converted to datetime
+
+    Returns
+    -------
+    pd.DataFrame
     """
     # avoiding mutable default variables
     datetime_features = datetime_features or []

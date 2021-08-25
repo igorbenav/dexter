@@ -6,10 +6,9 @@ from typing import List
 # TODO: optimize before appending to df_list
 
 
-def read_chunks(df_chunk) -> pd.DataFrame:
+def _read_chunks_(df_chunk) -> pd.DataFrame:
     """
     Reads a chunks object of a pandas dataframe
-
     Receives the object of a pd.read with chunksize smaller than the size of the dataset
 
     Returns the dataframe
@@ -31,6 +30,21 @@ def readm_csv(filepath: str, df_names: List[str] = None, chunksize: int = None, 
     Returns a FrameMap
 
     the folder should have only csv files, no .txt
+
+    Parameters
+    ----------
+    filepath : str
+        the path of the folder to be read
+    df_names : List[str], default None
+        a list with the names of the files
+    chunksize : int, default None
+        an integer to read the files in chunks
+    optimize : bool, default False
+        if True, returns memory optimized version of dataframes
+
+    Returns
+    -------
+    FrameMap
     """
     df_list = []
 
@@ -55,7 +69,7 @@ def readm_csv(filepath: str, df_names: List[str] = None, chunksize: int = None, 
     # If chunk_size is given, df_list is actually a list of reader objects,
     # Let's unpack these objects
     if chunksize is not None:
-        df_list = [read_chunks(i) for i in df_list]
+        df_list = [_read_chunks_(i) for i in df_list]
 
     framemap = FrameMap(df_list, df_names)
 
@@ -77,6 +91,21 @@ def readm_json(filepath: str, df_names: List[str] = None, chunksize: int = None,
     Returns a FrameMap
 
     the folder should have only json files, no .txt
+
+    Parameters
+    ----------
+    filepath : str
+        the path of the folder to be read
+    df_names : List[str], default None
+        a list with the names of the files
+    chunksize : int, default None
+        an integer to read the files in chunks
+    optimize : bool, default False
+        if True, returns memory optimized version of dataframes
+
+    Returns
+    -------
+    FrameMap
     """
     df_list = []
 
@@ -101,7 +130,7 @@ def readm_json(filepath: str, df_names: List[str] = None, chunksize: int = None,
     # If chunk_size is given, df_list is actually a list of reader objects,
     # Let's unpack these objects
     if chunksize is not None:
-        df_list = [read_chunks(i) for i in df_list]
+        df_list = [_read_chunks_(i) for i in df_list]
 
     framemap = FrameMap(df_list, df_names)
 
@@ -123,6 +152,19 @@ def readm_excel(filepath: str, df_names: List[str] = None, optimize: bool = Fals
     Returns a FrameMap
 
     the folder should have only xlsx files, no .txt
+
+    Parameters
+    ----------
+    filepath : str
+        the path of the folder to be read
+    df_names : List[str], default None
+        a list with the names of the files
+    optimize : bool, default False
+        if True, returns memory optimized version of dataframes
+
+    Returns
+    -------
+    FrameMap
     """
     df_list = []
 
@@ -164,6 +206,19 @@ def readm_pickle(filepath: str, df_names: List[str] = None, optimize: bool = Fal
     Returns a FrameMap
 
     the folder should have only pkl files, no .txt
+
+    Parameters
+    ----------
+    filepath : str
+        the path of the folder to be read
+    df_names : List[str], default None
+        a list with the names of the files
+    optimize : bool, default False
+        if True, returns memory optimized version of dataframes
+
+    Returns
+    -------
+    FrameMap
     """
     df_list = []
 
@@ -205,6 +260,19 @@ def readm_parquet(filepath: str, df_names: List[str] = None, optimize: bool = Fa
     Returns a FrameMap
 
     the folder should have only parquet files, no .txt
+
+    Parameters
+    ----------
+    filepath : str
+        the path of the folder to be read
+    df_names : List[str], default None
+        a list with the names of the files
+    optimize : bool, default False
+        if True, returns memory optimized version of dataframes
+
+    Returns
+    -------
+    FrameMap
     """
     df_list = []
 
