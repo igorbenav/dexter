@@ -318,3 +318,32 @@ class FrameMap(dict):
 
         for frame, name in zip(self.frames, names):
             frame.to_parquet(name + '.parquet')
+
+    def std(self, axis=None, skipna=None, level=None, ddof=1, numeric_only=None) -> 'FrameMap':
+        """
+        Receives a FrameMap
+        Returns a FrameMap with all standard deviations
+
+        Parameters
+        ----------
+        axis : {index (0), columns (1)}, default None
+        skipna : bool, default True
+            Exclude NA/null values. If an entire row/column is NA, the result will be NA.
+        level : int or level name, default None
+            If the axis is a MultiIndex (hierarchical), count along a particular level, collapsing into a Series.
+        ddof : int, default 1
+            Delta Degrees of Freedom. The divisor used in calculations is N - ddof, where N represents the number of
+            elements.
+        numeric_only : bool, default None
+             Include only float, int, boolean columns. If None, will attempt to use everything, then use only numeric
+             data.
+
+        Returns
+        -------
+        FrameMap
+            FrameMap with each standard deviation of dataframes.
+        """
+        return FrameMap(
+            [pd.DataFrame(frame.std(axis, skipna, level, ddof, numeric_only), columns=['std']) for frame in self.frames],
+            self.names
+        )
