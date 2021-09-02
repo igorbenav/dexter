@@ -319,7 +319,7 @@ class FrameMap(dict):
         for frame, name in zip(self.frames, names):
             frame.to_parquet(name + '.parquet')
 
-    def std(self, axis=None, skipna=None, level=None, ddof=1, numeric_only=None) -> 'FrameMap':
+    def std(self, axis: int = None, skipna: bool = True, level: int = None, ddof: int = 1, numeric_only: bool = None) -> 'FrameMap':
         """
         Receives a FrameMap
         Returns a FrameMap with all standard deviations
@@ -348,7 +348,7 @@ class FrameMap(dict):
             self.names
         )
 
-    def mean(self, axis: int = None) -> 'FrameMap':
+    def mean(self, axis: int = None, skipna: bool = True, level: int = None) -> 'FrameMap':
         """
         Receives the axis, returns the means for each dataframe in a framemap.
 
@@ -356,6 +356,10 @@ class FrameMap(dict):
         ----------
         axis : int or None, default None
             the axis {index (0), columns (1)}
+        skipna : bool, default True
+            Exclude NA/null values. If an entire row/column is NA, the result will be NA.
+        level : int or level name, default None
+            If the axis is a MultiIndex (hierarchical), count along a particular level, collapsing into a Series.
 
         Returns
         -------
@@ -363,6 +367,29 @@ class FrameMap(dict):
             FrameMap with the means of each dataframes.
         """
         return FrameMap(
-            [pd.DataFrame(frame.std(axis), columns=['mean']) for frame in self.frames],
+            [pd.DataFrame(frame.mean(axis, skipna, level), columns=['mean']) for frame in self.frames],
+            self.names
+        )
+
+    def median(self, axis: int = None, skipna : bool = True, level : int = None):
+        """
+        Receives the axis, returns the median for each dataframe in a framemap.
+
+        Parameters
+        ----------
+        axis : int or None, default None
+            the axis {index (0), columns (1)}
+        skipna : bool, default True
+            Exclude NA/null values. If an entire row/column is NA, the result will be NA.
+        level : int or level name, default None
+            If the axis is a MultiIndex (hierarchical), count along a particular level, collapsing into a Series.
+
+        Returns
+        -------
+        FrameMap
+            FrameMap with the means of each dataframes.
+        """
+        return FrameMap(
+            [pd.DataFrame(frame.median(axis, skipna, level), columns=['median']) for frame in self.frames],
             self.names
         )
