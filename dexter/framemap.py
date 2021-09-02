@@ -31,10 +31,6 @@ class FrameMap(dict):
     _______
     """
 
-    # @property
-    # def _constructor(self) -> type(FrameMap):
-    #     return FrameMap
-
     # ------------ Constructors ------------
 
     def __init__(
@@ -321,7 +317,6 @@ class FrameMap(dict):
 
     def std(self, axis: int = None, skipna: bool = True, level: int = None, ddof: int = 1, numeric_only: bool = None) -> 'FrameMap':
         """
-        Receives a FrameMap
         Returns a FrameMap with all standard deviations
 
         Parameters
@@ -348,9 +343,9 @@ class FrameMap(dict):
             self.names
         )
 
-    def mean(self, axis: int = None, skipna: bool = True, level: int = None) -> 'FrameMap':
+    def mean(self, axis: int = None, skipna: bool = True, level: int = None, numeric_only: bool = None) -> 'FrameMap':
         """
-        Receives the axis, returns the means for each dataframe in a framemap.
+        Returns the means for each dataframe in a framemap.
 
         Parameters
         ----------
@@ -360,20 +355,23 @@ class FrameMap(dict):
             Exclude NA/null values. If an entire row/column is NA, the result will be NA.
         level : int or level name, default None
             If the axis is a MultiIndex (hierarchical), count along a particular level, collapsing into a Series.
+        numeric_only : bool, default None
+             Include only float, int, boolean columns. If None, will attempt to use everything, then use only numeric
+             data.
 
         Returns
         -------
         FrameMap
-            FrameMap with the means of each dataframes.
+            FrameMap with the means of each dataframe.
         """
         return FrameMap(
-            [pd.DataFrame(frame.mean(axis, skipna, level), columns=['mean']) for frame in self.frames],
+            [pd.DataFrame(frame.mean(axis, skipna, level, numeric_only), columns=['mean']) for frame in self.frames],
             self.names
         )
 
-    def median(self, axis: int = None, skipna : bool = True, level : int = None):
+    def median(self, axis: int = None, skipna: bool = True, level: int = None, numeric_only: bool = None) -> 'FrameMap':
         """
-        Receives the axis, returns the median for each dataframe in a framemap.
+        Returns the median for each dataframe in a framemap.
 
         Parameters
         ----------
@@ -383,13 +381,92 @@ class FrameMap(dict):
             Exclude NA/null values. If an entire row/column is NA, the result will be NA.
         level : int or level name, default None
             If the axis is a MultiIndex (hierarchical), count along a particular level, collapsing into a Series.
+        numeric_only : bool, default None
+             Include only float, int, boolean columns. If None, will attempt to use everything, then use only numeric
+             data.
 
         Returns
         -------
         FrameMap
-            FrameMap with the means of each dataframes.
+            FrameMap with the medians of each dataframe.
         """
         return FrameMap(
-            [pd.DataFrame(frame.median(axis, skipna, level), columns=['median']) for frame in self.frames],
+            [pd.DataFrame(frame.median(axis, skipna, level, numeric_only), columns=['median']) for frame in self.frames],
+            self.names
+        )
+
+    def mode(self, axis: int = 0, numeric_only: bool = None, dropna: bool = True):
+        """
+        Returns the mode for each dataframe in a framemap.
+
+        Parameters
+        ----------
+        axis : int or None, default None
+            the axis {index (0), columns (1)}
+        numeric_only : bool, default None
+             Include only float, int, boolean columns. If None, will attempt to use everything, then use only numeric
+             data.
+        dropna : bool, default True
+                Don’t consider counts of NaN/NaT.
+
+        Returns
+        -------
+        FrameMap
+            FrameMap with the modes of each dataframes.
+        """
+        return FrameMap(
+            [pd.DataFrame(frame.mode(axis, numeric_only, dropna), columns=['mode']) for frame in self.frames],
+            self.names
+        )
+
+    def min(self, axis: int = None, skipna: bool = True, level: int = None, numeric_only: bool = None) -> 'FrameMap':
+        """
+        Returns the min values for each dataframe in a framemap.
+
+        Parameters
+        ----------
+        axis : int or None, default None
+            the axis {index (0), columns (1)}
+        skipna : bool, default True
+            Exclude NA/null values. If an entire row/column is NA, the result will be NA.
+        level : int or level name, default None
+            If the axis is a MultiIndex (hierarchical), count along a particular level, collapsing into a Series.
+        numeric_only : bool, default None
+             Include only float, int, boolean columns. If None, will attempt to use everything, then use only numeric
+             data.
+
+        Returns
+        -------
+        FrameMap
+            FrameMap with the min values of each dataframes.
+        """
+        return FrameMap(
+            [pd.DataFrame(frame.min(axis, skipna, level, numeric_only), columns=['min']) for frame in self.frames],
+            self.names
+        )
+
+    def max(self, axis: int = None, skipna: bool = True, level: int = None, numeric_only: bool = None) -> 'FrameMap':
+        """
+        Returns the min values for each dataframe in a framemap.
+
+        Parameters
+        ----------
+        axis : int or None, default None
+            the axis {index (0), columns (1)}
+        skipna : bool, default True
+            Exclude NA/null values. If an entire row/column is NA, the result will be NA.
+        level : int or level name, default None
+            If the axis is a MultiIndex (hierarchical), count along a particular level, collapsing into a Series.
+        numeric_only : bool, default None
+             Include only float, int, boolean columns. If None, will attempt to use everything, then use only numeric
+             data.
+
+        Returns
+        -------
+        FrameMap
+            FrameMap with the min values of each dataframes.
+        """
+        return FrameMap(
+            [pd.DataFrame(frame.max(axis, skipna, level, numeric_only), columns=['max']) for frame in self.frames],
             self.names
         )
