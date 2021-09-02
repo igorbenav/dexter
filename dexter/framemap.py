@@ -347,3 +347,22 @@ class FrameMap(dict):
             [pd.DataFrame(frame.std(axis, skipna, level, ddof, numeric_only), columns=['std']) for frame in self.frames],
             self.names
         )
+
+    def mean(self, axis: int = None) -> 'FrameMap':
+        """
+        Receives the axis, returns the means for each dataframe in a framemap.
+
+        Parameters
+        ----------
+        axis : int or None, default None
+            the axis {index (0), columns (1)}
+
+        Returns
+        -------
+        FrameMap
+            FrameMap with the means of each dataframes.
+        """
+        return FrameMap(
+            [pd.DataFrame(frame.std(axis), columns=['mean']) for frame in self.frames],
+            self.names
+        )
