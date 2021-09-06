@@ -470,3 +470,24 @@ class FrameMap(dict):
             [pd.DataFrame(frame.max(axis, skipna, level, numeric_only), columns=['max']) for frame in self.frames],
             self.names
         )
+
+    def corr(self, method: str = 'pearson', min_periods: int = 1) -> 'FrameMap':
+        """
+        Compute pairwise correlation of columns for all dataframes excluding NA values.
+
+        Parameters
+        ----------
+        method : {'pearson', 'kendall', 'spearman'} or callable
+            Method of correlation used.
+        min_periods : int
+            Minimum number of observations per pair of columns.
+
+        Returns
+        -------
+        FrameMap
+            FrameMap of correlation matrices for dataframes.
+        """
+        return FrameMap(
+            [frame.corr(method, min_periods) for frame in self.frames],
+            self.names
+        )
