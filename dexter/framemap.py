@@ -55,11 +55,33 @@ class FrameMap(dict):
     def __setattr__(self, key: str, value: pd.DataFrame) -> None:
         self[key] = value
 
+    # ------------ Rendering Methods -------------
+
     def _repr_html_(self) -> str:
         """
         Return a HTML representation for a FrameMap
         """
         return _to_html_str_(self.frames)
+
+    def display(self) -> 'IPython.core.display.HTML':
+        """
+        Receives a FrameMap.
+        Returns a table which contains each IpyTable in an HTML cell.
+
+        Returns
+        -------
+        IPython.core.display.HTML
+        """
+
+        # TODO: show the names of each dataframe above it
+        # unused for now, will be used to show the names of each dataframe above it
+        table_names = [''.join(f'<th style="text-align:center">{name}</th>') for name in self.names]
+
+        # creates an html representation of the tables side by side
+
+        return _to_html_(self.frames)
+
+    # ------------ IO methods -------------
 
     def rename_frames(self, new_names: list[str]) -> None:
         """
@@ -80,6 +102,79 @@ class FrameMap(dict):
             self[name] = frame
 
         self.names = new_names
+
+    def to_csv(self, names=None) -> None:
+        """
+        Receives a FrameMap
+        Generates a csv file for each of the dataframes with its name.
+
+        Parameters
+        ----------
+        names : list[str], default None
+        """
+        if not names:
+            names = self.names
+
+        for frame, name in zip(self.frames, names):
+            frame.to_csv(name + '.csv')
+
+    def to_excel(self, names=None) -> None:
+        """
+        Receives a FrameMap
+        Generates a xlsx file for each of the dataframes with its name.
+
+        Parameters
+        ----------
+        names : list[str], default None
+        """
+        if not names:
+            names = self.names
+
+        for frame, name in zip(self.frames, names):
+            frame.to_excel(name + '.xlsx')
+
+    def to_pickle(self, names=None) -> None:
+        """
+        Receives a FrameMap
+        Generates a xlsx file for each of the dataframes with its name.
+
+        Parameters
+        ----------
+        names : list[str], default None
+        """
+        if not names:
+            names = self.names
+
+        for frame, name in zip(self.frames, names):
+            frame.to_pickle(name + '.pkl')
+
+    def to_parquet(self, names=None) -> None:
+        """
+        Receives a FrameMap
+        Generates a parquet file for each of the dataframes with its name.
+
+        Parameters
+        ----------
+        names : list[str], default None
+        """
+        if not names:
+            names = self.names
+
+        for frame, name in zip(self.frames, names):
+            frame.to_parquet(name + '.parquet')
+
+    def optimize(self) -> 'FrameMap':
+        """
+        Receives a FrameMap
+        Returns a FrameMap with all dataframes column types converted to the smallest possible type
+
+        Returns
+        -------
+        FrameMap
+        """
+        return FrameMap([dexter.optimizer.optimize(df) for df in self.frames], self.names)
+
+    # ------------ Statistical Methods -------------
 
     def dtypes(self) -> 'FrameMap':
         """
@@ -143,24 +238,6 @@ class FrameMap(dict):
         """
 
         return FrameMap([df.describe(include='all') for df in self.frames], self.names)
-
-    def display(self) -> 'IPython.core.display.HTML':
-        """
-        Receives a FrameMap.
-        Returns a table which contains each IpyTable in an HTML cell.
-
-        Returns
-        -------
-        IPython.core.display.HTML
-        """
-
-        # TODO: show the names of each dataframe above it
-        # unused for now, will be used to show the names of each dataframe above it
-        table_names = [''.join(f'<th style="text-align:center">{name}</th>') for name in self.names]
-
-        # creates an html representation of the tables side by side
-
-        return _to_html_(self.frames)
 
     def head(self, n: int = 5) -> 'FrameMap':
         """
@@ -243,77 +320,6 @@ class FrameMap(dict):
 
         # getting the count of nunique values for each dataframe in self
         return FrameMap([pd.DataFrame(df.nunique(), columns=['non-null']) for df in self.frames], self.names)
-
-    def optimize(self) -> 'FrameMap':
-        """
-        Receives a FrameMap
-        Returns a FrameMap with all dataframes column types converted to the smallest possible type
-
-        Returns
-        -------
-        FrameMap
-        """
-        return FrameMap([dexter.optimizer.optimize(df) for df in self.frames], self.names)
-
-    def to_csv(self, names=None) -> None:
-        """
-        Receives a FrameMap
-        Generates a csv file for each of the dataframes with its name.
-
-        Parameters
-        ----------
-        names : list[str], default None
-        """
-        if not names:
-            names = self.names
-
-        for frame, name in zip(self.frames, names):
-            frame.to_csv(name + '.csv')
-
-    def to_excel(self, names=None) -> None:
-        """
-        Receives a FrameMap
-        Generates a xlsx file for each of the dataframes with its name.
-
-        Parameters
-        ----------
-        names : list[str], default None
-        """
-        if not names:
-            names = self.names
-
-        for frame, name in zip(self.frames, names):
-            frame.to_excel(name + '.xlsx')
-
-    def to_pickle(self, names=None) -> None:
-        """
-        Receives a FrameMap
-        Generates a xlsx file for each of the dataframes with its name.
-
-        Parameters
-        ----------
-        names : list[str], default None
-        """
-        if not names:
-            names = self.names
-
-        for frame, name in zip(self.frames, names):
-            frame.to_pickle(name + '.pkl')
-
-    def to_parquet(self, names=None) -> None:
-        """
-        Receives a FrameMap
-        Generates a parquet file for each of the dataframes with its name.
-
-        Parameters
-        ----------
-        names : list[str], default None
-        """
-        if not names:
-            names = self.names
-
-        for frame, name in zip(self.frames, names):
-            frame.to_parquet(name + '.parquet')
 
     def std(self, axis: int = None, skipna: bool = True, level: int = None, ddof: int = 1, numeric_only: bool = None) -> 'FrameMap':
         """
