@@ -14,7 +14,7 @@ def _to_html_str_(df_list: List[pd.DataFrame], name_list: List[str]):
     tables = (
         ''.join(
             ('<table><tr style="background-color:white;">',
-             ''.join([f'<td style="vertical-align:top">' + f'<h5 style="text-align:center">{name}</h5>' +
+             ''.join([f'<td style="vertical-align:top">' + f'<h5 style="text-align:center">{name}</h5><br>' +
                       table._repr_html_() + '</td>' for table, name in zip(df_list, name_list)]),
              '</tr></table>')
         )
