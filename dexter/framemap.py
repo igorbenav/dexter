@@ -61,7 +61,7 @@ class FrameMap(dict):
         """
         Return a HTML representation for a FrameMap
         """
-        return _to_html_str_(self.frames)
+        return _to_html_str_(self.frames, self.names)
 
     def display(self) -> 'IPython.core.display.HTML':
         """
@@ -79,7 +79,7 @@ class FrameMap(dict):
 
         # creates an html representation of the tables side by side
 
-        return _to_html_(self.frames)
+        return _to_html_(self.frames, self.names)
 
     # ------------ IO methods -------------
 
