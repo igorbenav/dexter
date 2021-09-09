@@ -95,7 +95,7 @@ class FrameMap(dict):
         # uses old name if new_name given is None
         new_names = [self.names[i] if not new_names[i] else new_names[i] for i in range(len(self.names))]
 
-        for name, frame in zip(self.names, self.frames):
+        for name, frame in zip(new_names, self.frames):
             if name in self.names:
                 del self[name]
 
