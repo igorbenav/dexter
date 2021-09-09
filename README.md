@@ -7,7 +7,7 @@
 for multiple structured table files in a folder. It's a high-level tool suitable for a first contact with a dataset
 composed of multiple dataframes.
 
-![](dexter.png)
+![](img/dexter.png)
 
 ## Features
 
