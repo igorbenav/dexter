@@ -29,8 +29,6 @@ def readm_csv(filepath: str, df_names: List[str] = None, chunksize: int = None, 
 
     Returns a FrameMap
 
-    the folder should have only csv files, no .txt
-
     Parameters
     ----------
     filepath : str
@@ -60,11 +58,13 @@ def readm_csv(filepath: str, df_names: List[str] = None, chunksize: int = None, 
     else:
         df_names = []
         path, dirs, files = next(os.walk(filepath))
-        file_count = len(files)
-        for i in range(file_count):
-            temp_df = pd.read_csv(filepath + files[i], chunksize=chunksize)
+        # only files with the .csv extension matter
+        files = [file for file in files if os.path.splitext(file)[-1] == '.csv']
+
+        for file in files:
+            temp_df = pd.read_csv(filepath + file, chunksize=chunksize)
             df_list.append(temp_df)
-            df_names.append(files[i][:-4])
+            df_names.append(file)
 
     # If chunk_size is given, df_list is actually a list of reader objects,
     # Let's unpack these objects
