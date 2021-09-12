@@ -8,8 +8,8 @@ HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
 setup(
-    name='dxter',
-    version='0.0.1',
+    name='dexter',
+    version='0.0.2',
     description='Data Exploration Terser',
     long_description=README,
     classifiers=[

@@ -19,8 +19,10 @@ composed of multiple dataframes.
 
 PyPI:
 ```sh
-pip install dxter
+pip install dexter
 ```
+
+https://pypi.org/project/dexter/
 
 ## Usage 
 
@@ -41,6 +43,7 @@ dataframes.display()
 ```Out:```
 
 <div style="float: left;margin-right:10px">
+  <h5 style="text-align:center">df1</h5>
   <table>
     <tr>
       <td><b>col1</b></td>
@@ -65,6 +68,7 @@ dataframes.display()
   </table>
 </div>
 <div style="float: left">
+  <h5 style="text-align:center">df2</h5>
   <table>
     <tr>
       <td><b>first</b></td>
