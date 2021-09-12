@@ -44,13 +44,13 @@ def readm_csv(filepath: str, df_names: List[str] = None, chunksize: int = None, 
     -------
     FrameMap
     """
-    df_list = []
+    df_list, extension = [], '.csv'
 
     # Here the function uses the names of the dataframes to read the files
     if df_names is not None:
         df_names = np.char.array(df_names)
         filepath = np.full(df_names.shape, filepath)
-        reader = filepath + df_names + '.csv'
+        reader = filepath + df_names + extension
 
         df_list = [pd.read_csv(i, chunksize=chunksize) for i in reader]
 
@@ -59,7 +59,7 @@ def readm_csv(filepath: str, df_names: List[str] = None, chunksize: int = None, 
         df_names = []
         path, dirs, files = next(os.walk(filepath))
         # only files with the .csv extension matter
-        files = [file for file in files if os.path.splitext(file)[-1] == '.csv']
+        files = [file for file in files if os.path.splitext(file)[-1] == extension]
 
         for file in files:
             temp_df = pd.read_csv(filepath + file, chunksize=chunksize)
