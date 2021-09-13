@@ -1,0 +1,638 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Welcome to dexter’s documentation! &#8212; dexter 0.0.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-dexter.readmultiple">
+<span id="welcome-to-dexter-s-documentation"></span><h1>Welcome to dexter’s documentation!<a class="headerlink" href="#module-dexter.readmultiple" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="dexter.readmultiple.readm_csv">
+<span class="sig-prename descclassname"><span class="pre">dexter.readmultiple.</span></span><span class="sig-name descname"><span class="pre">readm_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_names</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunksize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.readmultiple.readm_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads multiple files in a directory, returns a FrameMap
+If df_names == None, it iterates the whole directory.
+If optimize == True, returns a memory optimized version</p>
+<p>Receives the path and optionally a list of the dataframes names.</p>
+<p>Returns a FrameMap</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>str</em>) – the path of the folder to be read</p></li>
+<li><p><strong>df_names</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>default None</em>) – a list with the names of the files</p></li>
+<li><p><strong>chunksize</strong> (<em>int</em><em>, </em><em>default None</em>) – an integer to read the files in chunks</p></li>
+<li><p><strong>optimize</strong> (<em>bool</em><em>, </em><em>default False</em>) – if True, returns memory optimized version of dataframes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dexter.readmultiple.readm_excel">
+<span class="sig-prename descclassname"><span class="pre">dexter.readmultiple.</span></span><span class="sig-name descname"><span class="pre">readm_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_names</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.readmultiple.readm_excel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads multiple files in a directory, returns a FrameMap
+If df_names == None, it iterates the whole directory.
+If optimize == True, returns a memory optimized version</p>
+<p>Receives the path and optionally a list of the dataframes names.</p>
+<p>Returns a FrameMap</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>str</em>) – the path of the folder to be read</p></li>
+<li><p><strong>df_names</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>default None</em>) – a list with the names of the files</p></li>
+<li><p><strong>optimize</strong> (<em>bool</em><em>, </em><em>default False</em>) – if True, returns memory optimized version of dataframes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dexter.readmultiple.readm_json">
+<span class="sig-prename descclassname"><span class="pre">dexter.readmultiple.</span></span><span class="sig-name descname"><span class="pre">readm_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_names</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunksize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.readmultiple.readm_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads multiple files in a directory, returns a FrameMap
+If df_names == None, it iterates the whole directory.
+If optimize == True, returns a memory optimized version</p>
+<p>Receives the path and optionally a list of the dataframes names.</p>
+<p>Returns a FrameMap</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>str</em>) – the path of the folder to be read</p></li>
+<li><p><strong>df_names</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>default None</em>) – a list with the names of the files</p></li>
+<li><p><strong>chunksize</strong> (<em>int</em><em>, </em><em>default None</em>) – an integer to read the files in chunks</p></li>
+<li><p><strong>optimize</strong> (<em>bool</em><em>, </em><em>default False</em>) – if True, returns memory optimized version of dataframes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dexter.readmultiple.readm_parquet">
+<span class="sig-prename descclassname"><span class="pre">dexter.readmultiple.</span></span><span class="sig-name descname"><span class="pre">readm_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_names</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.readmultiple.readm_parquet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads multiple files in a directory, returns a FrameMap
+If df_names == None, it iterates the whole directory.
+If optimize == True, returns a memory optimized version</p>
+<p>Receives the path and optionally a list of the dataframes names.</p>
+<p>Returns a FrameMap</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>str</em>) – the path of the folder to be read</p></li>
+<li><p><strong>df_names</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>default None</em>) – a list with the names of the files</p></li>
+<li><p><strong>optimize</strong> (<em>bool</em><em>, </em><em>default False</em>) – if True, returns memory optimized version of dataframes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dexter.readmultiple.readm_pickle">
+<span class="sig-prename descclassname"><span class="pre">dexter.readmultiple.</span></span><span class="sig-name descname"><span class="pre">readm_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_names</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.readmultiple.readm_pickle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads multiple files in a directory, returns a FrameMap
+If df_names == None, it iterates the whole directory.
+If optimize == True, returns a memory optimized version</p>
+<p>Receives the path and optionally a list of the dataframes names.</p>
+<p>Returns a FrameMap</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>str</em>) – the path of the folder to be read</p></li>
+<li><p><strong>df_names</strong> (<em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>default None</em>) – a list with the names of the files</p></li>
+<li><p><strong>optimize</strong> (<em>bool</em><em>, </em><em>default False</em>) – if True, returns memory optimized version of dataframes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dexter.FrameMap">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">dexter.</span></span><span class="sig-name descname"><span class="pre">FrameMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frames</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dexter.FrameMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data in the form of a list of two tuples, one containing the names of dataframes and
+other containing the dataframes themselves.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frames</strong> (<em>List containing pandas dataframes.</em>) – </p></li>
+<li><p><strong>names</strong> (<em>list of strings</em><em> or </em><em>None</em><em>, </em><em>default None</em>) – List containing the names of the dataframes.
+If names is None, range(len(frames))</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dataframes</span> <span class="o">=</span> <span class="n">FrameMap</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">df3</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;df1_name&#39;</span><span class="p">,</span> <span class="s1">&#39;df2_name&#39;</span><span class="p">,</span> <span class="s1">&#39;df3_name&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dataframes</span>
+<span class="go">_______</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.corr">
+<span class="sig-name descname"><span class="pre">corr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'pearson'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_periods</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.corr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute pairwise correlation of columns for all dataframes excluding NA values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<em>{'pearson'</em><em>, </em><em>'kendall'</em><em>, </em><em>'spearman'}</em><em> or </em><em>callable</em>) – Method of correlation used.</p></li>
+<li><p><strong>min_periods</strong> (<em>int</em>) – Minimum number of observations per pair of columns.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>FrameMap of correlation matrices for dataframes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.describe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a FrameMap.
+Returns a list of dataframes with each showing the types of each column of each original
+dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.display">
+<span class="sig-name descname"><span class="pre">display</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">IPython.core.display.HTML</span><a class="headerlink" href="#dexter.FrameMap.display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a FrameMap.
+Returns a table which contains each IpyTable in an HTML cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>IPython.core.display.HTML</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.dtypes">
+<span class="sig-name descname"><span class="pre">dtypes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.dtypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a FrameMap.
+Returns a list of dataframes with each showing the types of each column of each original
+dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.head">
+<span class="sig-name descname"><span class="pre">head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.head" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a FrameMap.
+Returns a table which contains each df.head(n) in an HTML cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em><em>, </em><em>default 5</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.max">
+<span class="sig-name descname"><span class="pre">max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numeric_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the min values for each dataframe in a framemap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>axis</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default None</em>) – the axis {index (0), columns (1)}</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>default True</em>) – Exclude NA/null values. If an entire row/column is NA, the result will be NA.</p></li>
+<li><p><strong>level</strong> (<em>int</em><em> or </em><em>level name</em><em>, </em><em>default None</em>) – If the axis is a MultiIndex (hierarchical), count along a particular level, collapsing into a Series.</p></li>
+<li><p><strong>numeric_only</strong> (<em>bool</em><em>, </em><em>default None</em>) – Include only float, int, boolean columns. If None, will attempt to use everything, then use only numeric
+data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>FrameMap with the min values of each dataframes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numeric_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the means for each dataframe in a framemap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>axis</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default None</em>) – the axis {index (0), columns (1)}</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>default True</em>) – Exclude NA/null values. If an entire row/column is NA, the result will be NA.</p></li>
+<li><p><strong>level</strong> (<em>int</em><em> or </em><em>level name</em><em>, </em><em>default None</em>) – If the axis is a MultiIndex (hierarchical), count along a particular level, collapsing into a Series.</p></li>
+<li><p><strong>numeric_only</strong> (<em>bool</em><em>, </em><em>default None</em>) – Include only float, int, boolean columns. If None, will attempt to use everything, then use only numeric
+data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>FrameMap with the means of each dataframe.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.median">
+<span class="sig-name descname"><span class="pre">median</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numeric_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.median" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the median for each dataframe in a framemap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>axis</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default None</em>) – the axis {index (0), columns (1)}</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>default True</em>) – Exclude NA/null values. If an entire row/column is NA, the result will be NA.</p></li>
+<li><p><strong>level</strong> (<em>int</em><em> or </em><em>level name</em><em>, </em><em>default None</em>) – If the axis is a MultiIndex (hierarchical), count along a particular level, collapsing into a Series.</p></li>
+<li><p><strong>numeric_only</strong> (<em>bool</em><em>, </em><em>default None</em>) – Include only float, int, boolean columns. If None, will attempt to use everything, then use only numeric
+data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>FrameMap with the medians of each dataframe.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.memory_usage">
+<span class="sig-name descname"><span class="pre">memory_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.memory_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a FrameMap.
+Returns a table which contains each df.memory_usage(deep=True).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.min">
+<span class="sig-name descname"><span class="pre">min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numeric_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the min values for each dataframe in a framemap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>axis</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default None</em>) – the axis {index (0), columns (1)}</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>default True</em>) – Exclude NA/null values. If an entire row/column is NA, the result will be NA.</p></li>
+<li><p><strong>level</strong> (<em>int</em><em> or </em><em>level name</em><em>, </em><em>default None</em>) – If the axis is a MultiIndex (hierarchical), count along a particular level, collapsing into a Series.</p></li>
+<li><p><strong>numeric_only</strong> (<em>bool</em><em>, </em><em>default None</em>) – Include only float, int, boolean columns. If None, will attempt to use everything, then use only numeric
+data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>FrameMap with the min values of each dataframes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.mode">
+<span class="sig-name descname"><span class="pre">mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numeric_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropna</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dexter.FrameMap.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mode for each dataframe in a framemap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>axis</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default None</em>) – the axis {index (0), columns (1)}</p></li>
+<li><p><strong>numeric_only</strong> (<em>bool</em><em>, </em><em>default None</em>) – Include only float, int, boolean columns. If None, will attempt to use everything, then use only numeric
+data.</p></li>
+<li><p><strong>dropna</strong> (<em>bool</em><em>, </em><em>default True</em>) – Don’t consider counts of NaN/NaT.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>FrameMap with the modes of each dataframes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.multiple_missing">
+<span class="sig-name descname"><span class="pre">multiple_missing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.multiple_missing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives FrameMap.</p>
+<p>Returns a list of dataframes with each showing the amount of missing values from each
+column of each original dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list[pd.DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.nunique">
+<span class="sig-name descname"><span class="pre">nunique</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.nunique" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a FrameMap.
+Returns a table which contains the number of non-null values of each column</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.optimize">
+<span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a FrameMap
+Returns a FrameMap with all dataframes column types converted to the smallest possible type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.rename_frames">
+<span class="sig-name descname"><span class="pre">rename_frames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_names</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#dexter.FrameMap.rename_frames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renames the dataframes in a framemap by using a list of the new names
+if a new name is None, uses the old name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>new_names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>default None</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.shapes">
+<span class="sig-name descname"><span class="pre">shapes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.shapes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a FrameMap.
+Returns a table which contains the shapes of each df.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.std">
+<span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddof</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numeric_only</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.std" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a FrameMap with all standard deviations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>axis</strong> (<em>{index</em><em> (</em><em>0</em><em>)</em><em>, </em><em>columns</em><em> (</em><em>1</em><em>)</em><em>}</em><em>, </em><em>default None</em>) – </p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>default True</em>) – Exclude NA/null values. If an entire row/column is NA, the result will be NA.</p></li>
+<li><p><strong>level</strong> (<em>int</em><em> or </em><em>level name</em><em>, </em><em>default None</em>) – If the axis is a MultiIndex (hierarchical), count along a particular level, collapsing into a Series.</p></li>
+<li><p><strong>ddof</strong> (<em>int</em><em>, </em><em>default 1</em>) – Delta Degrees of Freedom. The divisor used in calculations is N - ddof, where N represents the number of
+elements.</p></li>
+<li><p><strong>numeric_only</strong> (<em>bool</em><em>, </em><em>default None</em>) – Include only float, int, boolean columns. If None, will attempt to use everything, then use only numeric
+data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>FrameMap with each standard deviation of dataframes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.tail">
+<span class="sig-name descname"><span class="pre">tail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#dexter.FrameMap" title="dexter.framemap.FrameMap"><span class="pre">dexter.framemap.FrameMap</span></a><a class="headerlink" href="#dexter.FrameMap.tail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a FrameMap.
+Returns a table which contains each df.tail(n).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em><em>, </em><em>default 5</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#dexter.FrameMap" title="dexter.FrameMap">FrameMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.to_csv">
+<span class="sig-name descname"><span class="pre">to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#dexter.FrameMap.to_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a FrameMap
+Generates a csv file for each of the dataframes with its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>default None</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.to_excel">
+<span class="sig-name descname"><span class="pre">to_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#dexter.FrameMap.to_excel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a FrameMap
+Generates a xlsx file for each of the dataframes with its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>default None</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.to_parquet">
+<span class="sig-name descname"><span class="pre">to_parquet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#dexter.FrameMap.to_parquet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a FrameMap
+Generates a parquet file for each of the dataframes with its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>default None</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dexter.FrameMap.to_pickle">
+<span class="sig-name descname"><span class="pre">to_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#dexter.FrameMap.to_pickle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receives a FrameMap
+Generates a xlsx file for each of the dataframes with its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>default None</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">dexter</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Igor Magalhaes.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
