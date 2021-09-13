@@ -1,5 +1,10 @@
 # dexter
+[![PyPI version](https://badge.fury.io/py/dexter.svg)](https://badge.fury.io/py/dexter)
+[![GitHub license](https://img.shields.io/github/license/igormagalhaesr/dexter)](https://github.com/igormagalhaesr/dexter/blob/main/LICENSE.txt)
+[![Documentation Status](https://readthedocs.org/projects/dexter/badge/?version=latest)](https://dexter.readthedocs.io/en/latest/?badge=latest)
+___
 >data exploration terser
+
 
 ## What is dexter?
 
