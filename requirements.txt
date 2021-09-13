@@ -1,4 +1,0 @@
-python>=3.8
-numpy>=1.18.0
-pandas>=1.0.5
-IPython>=7.16.0
