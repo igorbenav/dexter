@@ -115,6 +115,10 @@ Multiple Descriptions
 dataframes.describe()
 ```
 
+![](img/first_use.png)
+![](img/describe.png)
+![](img/memory_usage.png)
+
 For more concrete examples, check the [notebook](Example.ipynb)
 
 ## Contributing
