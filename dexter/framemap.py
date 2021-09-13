@@ -83,7 +83,7 @@ class FrameMap(dict):
 
     # ------------ IO methods -------------
 
-    def rename_frames(self, new_names: list[str]) -> None:
+    def rename_frames(self, new_names: List[str]) -> None:
         """
         Renames the dataframes in a framemap by using a list of the new names
         if a new name is None, uses the old name
