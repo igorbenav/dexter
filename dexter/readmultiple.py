@@ -58,7 +58,7 @@ def readm_csv(filepath: str, df_names: List[str] = None, chunksize: int = None, 
     else:
         df_names = []
         path, dirs, files = next(os.walk(filepath))
-        # only files with the .csv extension matter
+        # only files with the appropriate extension matter
         files = [file for file in files if os.path.splitext(file)[-1] == extension]
 
         for file in files:
@@ -90,8 +90,6 @@ def readm_json(filepath: str, df_names: List[str] = None, chunksize: int = None,
 
     Returns a FrameMap
 
-    the folder should have only json files, no .txt
-
     Parameters
     ----------
     filepath : str
@@ -107,13 +105,13 @@ def readm_json(filepath: str, df_names: List[str] = None, chunksize: int = None,
     -------
     FrameMap
     """
-    df_list = []
+    df_list, extension = [], '.json'
 
     # Here the function uses the names of the dataframes to read the files
     if df_names is not None:
         df_names = np.char.array(df_names)
         filepath = np.full(df_names.shape, filepath)
-        reader = filepath + df_names + '.json'
+        reader = filepath + df_names + extension
 
         df_list = [pd.read_json(i, chunksize=chunksize) for i in reader]
 
@@ -121,11 +119,13 @@ def readm_json(filepath: str, df_names: List[str] = None, chunksize: int = None,
     else:
         df_names = []
         path, dirs, files = next(os.walk(filepath))
-        file_count = len(files)
-        for i in range(file_count):
-            temp_df = pd.read_json(filepath + files[i], chunksize=chunksize)
+        # only files with the appropriate extension matter
+        files = [file for file in files if os.path.splitext(file)[-1] == extension]
+
+        for file in files:
+            temp_df = pd.read_json(filepath + file, chunksize=chunksize)
             df_list.append(temp_df)
-            df_names.append(files[i][:-5])
+            df_names.append(file)
 
     # If chunk_size is given, df_list is actually a list of reader objects,
     # Let's unpack these objects
@@ -151,8 +151,6 @@ def readm_excel(filepath: str, df_names: List[str] = None, optimize: bool = Fals
 
     Returns a FrameMap
 
-    the folder should have only xlsx files, no .txt
-
     Parameters
     ----------
     filepath : str
@@ -166,13 +164,13 @@ def readm_excel(filepath: str, df_names: List[str] = None, optimize: bool = Fals
     -------
     FrameMap
     """
-    df_list = []
+    df_list, extension = [], '.xlsx'
 
     # Here the function uses the names of the dataframes to read the files
     if df_names is not None:
         df_names = np.char.array(df_names)
         filepath = np.full(df_names.shape, filepath)
-        reader = filepath + df_names + '.xlsx'
+        reader = filepath + df_names + extension
 
         df_list = [pd.read_excel(i) for i in reader]
 
@@ -180,11 +178,13 @@ def readm_excel(filepath: str, df_names: List[str] = None, optimize: bool = Fals
     else:
         df_names = []
         path, dirs, files = next(os.walk(filepath))
-        file_count = len(files)
-        for i in range(file_count):
-            temp_df = pd.read_excel(filepath + files[i])
+        # only files with the appropriate extension matter
+        files = [file for file in files if os.path.splitext(file)[-1] == extension]
+
+        for file in files:
+            temp_df = pd.read_excel(filepath + file)
             df_list.append(temp_df)
-            df_names.append(files[i][:-5])
+            df_names.append(file)
 
     framemap = FrameMap(df_list, df_names)
 
@@ -205,8 +205,6 @@ def readm_pickle(filepath: str, df_names: List[str] = None, optimize: bool = Fal
 
     Returns a FrameMap
 
-    the folder should have only pkl files, no .txt
-
     Parameters
     ----------
     filepath : str
@@ -220,13 +218,13 @@ def readm_pickle(filepath: str, df_names: List[str] = None, optimize: bool = Fal
     -------
     FrameMap
     """
-    df_list = []
+    df_list, extension = [], '.pkl'
 
     # Here the function uses the names of the dataframes to read the files
     if df_names is not None:
         df_names = np.char.array(df_names)
         filepath = np.full(df_names.shape, filepath)
-        reader = filepath + df_names + '.pkl'
+        reader = filepath + df_names + extension
 
         df_list = [pd.read_pickle(i) for i in reader]
 
@@ -234,11 +232,13 @@ def readm_pickle(filepath: str, df_names: List[str] = None, optimize: bool = Fal
     else:
         df_names = []
         path, dirs, files = next(os.walk(filepath))
-        file_count = len(files)
-        for i in range(file_count):
-            temp_df = pd.read_pickle(filepath + files[i])
+        # only files with the appropriate extension matter
+        files = [file for file in files if os.path.splitext(file)[-1] == extension]
+
+        for file in files:
+            temp_df = pd.read_pickle(filepath + file)
             df_list.append(temp_df)
-            df_names.append(files[i][:-4])
+            df_names.append(file)
 
     framemap = FrameMap(df_list, df_names)
 
@@ -259,8 +259,6 @@ def readm_parquet(filepath: str, df_names: List[str] = None, optimize: bool = Fa
 
     Returns a FrameMap
 
-    the folder should have only parquet files, no .txt
-
     Parameters
     ----------
     filepath : str
@@ -274,13 +272,13 @@ def readm_parquet(filepath: str, df_names: List[str] = None, optimize: bool = Fa
     -------
     FrameMap
     """
-    df_list = []
+    df_list, extension = [], '.parquet'
 
     # Here the function uses the names of the dataframes to read the files
     if df_names is not None:
         df_names = np.char.array(df_names)
         filepath = np.full(df_names.shape, filepath)
-        reader = filepath + df_names + '.parquet'
+        reader = filepath + df_names + extension
 
         df_list = [pd.read_parquet(i) for i in reader]
 
@@ -288,11 +286,13 @@ def readm_parquet(filepath: str, df_names: List[str] = None, optimize: bool = Fa
     else:
         df_names = []
         path, dirs, files = next(os.walk(filepath))
-        file_count = len(files)
-        for i in range(file_count):
-            temp_df = pd.read_parquet(filepath + files[i])
+        # only files with the appropriate extension matter
+        files = [file for file in files if os.path.splitext(file)[-1] == extension]
+
+        for file in files:
+            temp_df = pd.read_parquet(filepath + file)
             df_list.append(temp_df)
-            df_names.append(files[i][:-8])
+            df_names.append(file)
 
     framemap = FrameMap(df_list, df_names)
 

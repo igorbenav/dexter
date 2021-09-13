@@ -5,7 +5,7 @@ Data in the form of a list of dataframes.
 
 """
 
-from dexter.helper import _to_html_str_
+from dexter.display import _to_html_str_
 
 
 class FrameList(list):

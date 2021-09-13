@@ -7,7 +7,7 @@ Data in the form of a dictionary of dataframes, the keys are the names of the da
 from typing import List
 import pandas as pd
 import numpy as np
-from dexter.helper import _to_html_str_, _to_html_
+from dexter.display import _to_html_str_, _to_html_
 import dexter.optimizer
 
 
