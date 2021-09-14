@@ -29,4 +29,10 @@ setup(
     author_email='igor.magalhaes.r@gmail.com',
     license='BSD 3',
     packages=find_packages(exclude=("tests",)),
+    keyworks='Dataframes',
+    project_urls={
+        'Documentation': 'https://github.com/igormagalhaesr/dexter/blob/main/README.md',
+        'Source': 'https://github.com/igormagalhaesr/dexter',
+        'Tracker': 'https://github.com/igormagalhaesr/dexter/issues',
+    },
 )
