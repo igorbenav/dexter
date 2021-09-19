@@ -19,6 +19,31 @@ def _read_chunks_(df_chunk) -> pd.DataFrame:
     return df
 
 
+def _reader_by_name_(filepath, df_names, extension):
+    """
+    Reads files with names in df_names and the proper extension in the filepath
+
+    Returns a numpy array with the dataframes ready to be read by pd.read_* functions
+    """
+    # Here the function uses the names of the dataframes to read the files
+    df_names = np.char.array(df_names)
+    filepath = np.full(df_names.shape, filepath)
+
+    return filepath + df_names + extension
+
+
+def _read_all_by_path_(filepath, extension):
+    """
+    Reads files with the proper extension in the filepath
+
+    Returns a list of the names of the dataframes
+    """
+    path, dirs, files = next(os.walk(filepath))
+
+    # only files with the appropriate extension matter
+    return [file for file in files if os.path.splitext(file)[-1] == extension]
+
+
 def readm_csv(filepath: str, df_names: List[str] = None, chunksize: int = None, optimize: bool = False) -> FrameMap:
     """
     Reads multiple files in a directory, returns a FrameMap
@@ -48,18 +73,13 @@ def readm_csv(filepath: str, df_names: List[str] = None, chunksize: int = None, 
 
     # Here the function uses the names of the dataframes to read the files
     if df_names is not None:
-        df_names = np.char.array(df_names)
-        filepath = np.full(df_names.shape, filepath)
-        reader = filepath + df_names + extension
-
+        reader = _reader_by_name_(filepath, df_names, extension)
         df_list = [pd.read_csv(i, chunksize=chunksize) for i in reader]
 
     # If names are not given, the function just reads all data in folder
     else:
         df_names = []
-        path, dirs, files = next(os.walk(filepath))
-        # only files with the appropriate extension matter
-        files = [file for file in files if os.path.splitext(file)[-1] == extension]
+        files = _read_all_by_path_(filepath, extension)
 
         for file in files:
             temp_df = pd.read_csv(filepath + file, chunksize=chunksize)
@@ -109,18 +129,13 @@ def readm_json(filepath: str, df_names: List[str] = None, chunksize: int = None,
 
     # Here the function uses the names of the dataframes to read the files
     if df_names is not None:
-        df_names = np.char.array(df_names)
-        filepath = np.full(df_names.shape, filepath)
-        reader = filepath + df_names + extension
-
+        reader = _reader_by_name_(filepath, df_names, extension)
         df_list = [pd.read_json(i, chunksize=chunksize) for i in reader]
 
     # If names are not given, the function just reads all data in folder
     else:
         df_names = []
-        path, dirs, files = next(os.walk(filepath))
-        # only files with the appropriate extension matter
-        files = [file for file in files if os.path.splitext(file)[-1] == extension]
+        files = _read_all_by_path_(filepath, extension)
 
         for file in files:
             temp_df = pd.read_json(filepath + file, chunksize=chunksize)
@@ -168,18 +183,13 @@ def readm_excel(filepath: str, df_names: List[str] = None, optimize: bool = Fals
 
     # Here the function uses the names of the dataframes to read the files
     if df_names is not None:
-        df_names = np.char.array(df_names)
-        filepath = np.full(df_names.shape, filepath)
-        reader = filepath + df_names + extension
-
+        reader = _reader_by_name_(filepath, df_names, extension)
         df_list = [pd.read_excel(i) for i in reader]
 
     # If names are not given, the function just reads all data in folder
     else:
         df_names = []
-        path, dirs, files = next(os.walk(filepath))
-        # only files with the appropriate extension matter
-        files = [file for file in files if os.path.splitext(file)[-1] == extension]
+        files = _read_all_by_path_(filepath, extension)
 
         for file in files:
             temp_df = pd.read_excel(filepath + file)
@@ -222,18 +232,13 @@ def readm_pickle(filepath: str, df_names: List[str] = None, optimize: bool = Fal
 
     # Here the function uses the names of the dataframes to read the files
     if df_names is not None:
-        df_names = np.char.array(df_names)
-        filepath = np.full(df_names.shape, filepath)
-        reader = filepath + df_names + extension
-
+        reader = _reader_by_name_(filepath, df_names, extension)
         df_list = [pd.read_pickle(i) for i in reader]
 
     # If names are not given, the function just reads all data in folder
     else:
         df_names = []
-        path, dirs, files = next(os.walk(filepath))
-        # only files with the appropriate extension matter
-        files = [file for file in files if os.path.splitext(file)[-1] == extension]
+        files = _read_all_by_path_(filepath, extension)
 
         for file in files:
             temp_df = pd.read_pickle(filepath + file)
@@ -276,18 +281,13 @@ def readm_parquet(filepath: str, df_names: List[str] = None, optimize: bool = Fa
 
     # Here the function uses the names of the dataframes to read the files
     if df_names is not None:
-        df_names = np.char.array(df_names)
-        filepath = np.full(df_names.shape, filepath)
-        reader = filepath + df_names + extension
-
+        reader = _reader_by_name_(filepath, df_names, extension)
         df_list = [pd.read_parquet(i) for i in reader]
 
     # If names are not given, the function just reads all data in folder
     else:
         df_names = []
-        path, dirs, files = next(os.walk(filepath))
-        # only files with the appropriate extension matter
-        files = [file for file in files if os.path.splitext(file)[-1] == extension]
+        files = _read_all_by_path_(filepath, extension)
 
         for file in files:
             temp_df = pd.read_parquet(filepath + file)

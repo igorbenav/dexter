@@ -9,7 +9,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name='dexter',
-    version='0.0.3',
+    version='0.0.5',
     description='Data Exploration Terser',
     long_description=README,
     classifiers=[
