@@ -73,12 +73,6 @@ class FrameMap(dict):
         IPython.core.display.HTML
         """
 
-        # TODO: show the names of each dataframe above it
-        # unused for now, will be used to show the names of each dataframe above it
-        table_names = [''.join(f'<th style="text-align:center">{name}</th>') for name in self.names]
-
-        # creates an html representation of the tables side by side
-
         return _to_html_(self.frames, self.names)
 
     # ------------ IO methods -------------
@@ -173,6 +167,13 @@ class FrameMap(dict):
         FrameMap
         """
         return FrameMap([dexter.optimizer.optimize(df) for df in self.frames], self.names)
+
+    @property
+    def T(self) -> 'FrameMap':
+        """
+        transposes all dataframes in a FrameMap
+        """
+        return FrameMap([df.T for df in self.frames], self.names)
 
     # ------------ Statistical Methods -------------
 
@@ -497,3 +498,42 @@ class FrameMap(dict):
             [frame.corr(method, min_periods) for frame in self.frames],
             self.names
         )
+
+    # ------------ Reindexing Methods -------------
+
+    def reset_index(self, level=None, drop=False, inplace=False, col_level=0, col_fill=''):
+        """
+        Reset the index, or a level of it.
+
+        Reset the index of the DataFrame, and use the default one instead. If the DataFrame has a MultiIndex, this
+        method can remove one or more levels.
+
+        Parameters
+        ----------
+        level : int, str, tuple, or list, default None
+            the levels to be removed from the index, removes all by default
+        drop : bool, default False
+            do not try to insert index into dataframe columns. This resets the index to the default integer index.
+        inplace : bool, default False
+            reset the indexes in place
+        col_level : int or str, default 0
+            If the columns have multiple levels, determines which level the labels are inserted into.
+            By default it is inserted into the first level.
+        col_fill : object, default ''
+            If the columns have multiple levels, determines how the other levels are named. If None then the index name is repeated.
+
+        Returns
+        -------
+        FrameMap or None
+            FrameMap with each DataFrame with the new index or None if inplace=True.
+        """
+        out = None
+
+        if inplace:
+            for frame in self.frames:
+                frame.reset_index(level, drop, inplace, col_level, col_fill)
+
+        else:
+            out = FrameMap([frame.reset_index(level, drop, inplace, col_level, col_fill) for frame in self.frames])
+
+        return out
