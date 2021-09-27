@@ -84,7 +84,8 @@ def readm_csv(filepath: str, df_names: List[str] = None, chunksize: int = None, 
         for file in files:
             temp_df = pd.read_csv(filepath + file, chunksize=chunksize)
             df_list.append(temp_df)
-            df_names.append(file)
+            # note: appended only the name, separate of the extension
+            df_names.append(os.path.splitext(file)[0])
 
     # If chunk_size is given, df_list is actually a list of reader objects,
     # Let's unpack these objects
@@ -100,7 +101,7 @@ def readm_csv(filepath: str, df_names: List[str] = None, chunksize: int = None, 
     return framemap
 
 
-def readm_json(filepath: str, df_names: List[str] = None, chunksize: int = None, optimize: bool = False) -> FrameMap:
+def readm_json(filepath: str, df_names: List[str] = None, chunksize: int = None, optimize: bool = False, lines: bool = False) -> FrameMap:
     """
     Reads multiple files in a directory, returns a FrameMap
     If df_names == None, it iterates the whole directory.
@@ -120,6 +121,8 @@ def readm_json(filepath: str, df_names: List[str] = None, chunksize: int = None,
         an integer to read the files in chunks
     optimize : bool, default False
         if True, returns memory optimized version of dataframes
+    lines : bool, default False
+        read the file as a json object per line
 
     Returns
     -------
@@ -130,7 +133,7 @@ def readm_json(filepath: str, df_names: List[str] = None, chunksize: int = None,
     # Here the function uses the names of the dataframes to read the files
     if df_names is not None:
         reader = _reader_by_name_(filepath, df_names, extension)
-        df_list = [pd.read_json(i, chunksize=chunksize) for i in reader]
+        df_list = [pd.read_json(i, chunksize=chunksize, lines=lines) for i in reader]
 
     # If names are not given, the function just reads all data in folder
     else:
