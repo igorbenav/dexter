@@ -141,7 +141,7 @@ def readm_json(filepath: str, df_names: List[str] = None, chunksize: int = None,
         files = _read_all_by_path_(filepath, extension)
 
         for file in files:
-            temp_df = pd.read_json(filepath + file, chunksize=chunksize)
+            temp_df = pd.read_json(filepath + file, chunksize=chunksize, lines=lines)
             df_list.append(temp_df)
             df_names.append(file)
 
