@@ -38,7 +38,7 @@ import dexter as dxt
 
 Reading multiple dataframes in a folder:
 ```python
-dataframes = dxt.readm_csv(./folder/)
+dataframes = dxt.readm_csv("./folder/")
 ```
 
 Displaying results:
